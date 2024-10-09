@@ -65,7 +65,7 @@ public class ctrlAgregareventos implements MouseListener{
     public void mouseClicked(MouseEvent e) {
         
         if(e.getSource() == vistaagregareventos.btnvolvercalendario){
-            System.out.println("Se dio clic en el botÃ³n para volver al frmmenu");
+            System.out.println("Se dio clic en el botón para volver al frmmenu");
             vistaagregareventos.dispose();
         }
         

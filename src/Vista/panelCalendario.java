@@ -21,6 +21,8 @@ public class panelCalendario extends javax.swing.JPanel {
     private void initComponents() {
 
         btnAgregareventos = new javax.swing.JButton();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -35,10 +37,19 @@ public class panelCalendario extends javax.swing.JPanel {
                 btnAgregareventosActionPerformed(evt);
             }
         });
-        add(btnAgregareventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 310, 160, 45));
+        add(btnAgregareventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 160, 45));
+
+        jCalendar1.setBackground(new java.awt.Color(255, 255, 255));
+        jCalendar1.setForeground(new java.awt.Color(0, 0, 0));
+        jCalendar1.setDecorationBackgroundColor(new java.awt.Color(255, 255, 255));
+        add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 490, 310));
+
+        jLabel2.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Calendario");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/pntcalen.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -49,6 +60,8 @@ public class panelCalendario extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAgregareventos;
+    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

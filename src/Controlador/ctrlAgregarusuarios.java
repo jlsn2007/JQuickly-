@@ -48,6 +48,7 @@ public class ctrlAgregarusuarios implements MouseListener{
         Vistaus.btnAgregarusuarios.addMouseListener(this);
         Vistaus.btnEditar.addMouseListener(this);
         Vistaus.btnEliminar.addMouseListener(this);
+        Vistaus.volverprin.addMouseListener(this);
         Vistaus.jtbUsuarios.addMouseListener(this);
         
         
@@ -58,8 +59,9 @@ public class ctrlAgregarusuarios implements MouseListener{
                 Rol selectedRol = (Rol) vistaus.cbRol.getSelectedItem();
                 if(selectedRol != null) {
                     int idr = selectedRol.getId_rol();
-            // Si el rol es Administrador (supongamos que el ID es 1)
-            
+                    System.out.println("Esto es lo que se manda a traer de la base de datos (Rol): " + selectedRol.getTipo_rol() + " con ID: " + idr);
+                    
+            // Si el rol es Administrador (supongamos que el ID es 1) 
             if(idr == 3) { 
                 vistaus.cbGrado.setEnabled(false);
                 vistaus.cbComite.setEnabled(false);
@@ -79,14 +81,15 @@ public class ctrlAgregarusuarios implements MouseListener{
             }
         });
         
-        //Cargar los datos del combobox de roles con el mÃ©todo en el modelo Grado
+        //Cargar los datos del combobox de roles con el método en el modelo Grado
         
         vistaus.cbGrado.addActionListener(e ->{
             if(e.getSource()== vistaus.cbGrado){
-                Grado selectedItem =(Grado) vistaus.cbGrado.getSelectedItem();
-                if(selectedItem != null){
-                    int idg = selectedItem.getId_grado();
+                Grado selectedGrado =(Grado) vistaus.cbGrado.getSelectedItem();
+                if(selectedGrado != null){
+                    int idg = selectedGrado.getId_grado();
                     ModeloGrado.setId_grado(idg);
+                    System.out.println("Esto es lo que se manda a traer de la base de datos (Grado): " + selectedGrado.getGrado()+ " con ID: " + idg);
                 }
             }
         });
@@ -95,10 +98,11 @@ public class ctrlAgregarusuarios implements MouseListener{
         
         vistaus.cbComite.addActionListener(e ->{
             if(e.getSource()== vistaus.cbComite){
-                Comite selectedItem =(Comite) vistaus.cbComite.getSelectedItem();
-                if(selectedItem != null){
-                    String idc =selectedItem.getComite();
-                    ModeloComite.setComite(idc);
+                Comite selectedComite =(Comite) vistaus.cbComite.getSelectedItem();
+                if(selectedComite != null){
+                    int idc = selectedComite.getId_comite();
+                    ModeloComite.setId_comite(idc);
+                     System.out.println("Esto es lo que se manda a traer de la base de datos (Comité): " + selectedComite.getComite()+ " con ID: " + idc);
                 }
             }
         });
@@ -174,6 +178,9 @@ public class ctrlAgregarusuarios implements MouseListener{
             ModeloUsuario.setNombre(vistaus.txtNombreus.getText());
             ModeloUsuario.setCorreo_electronico(vistaus.txtCorreous.getText());
             ModeloUsuario.setContraseña(ModeloUsuario.SHA256(vistaus.txtContraus.getText()));
+            ModeloUsuario.getId_rol();
+            ModeloUsuario.getId_grado();
+            ModeloUsuario.getId_comite();
             ModeloUsuario.GuardarUsuario();     
             ModeloUsuario.Mostrar(vistaus.jtbUsuarios);
             
@@ -266,6 +273,10 @@ public class ctrlAgregarusuarios implements MouseListener{
             else {
                 JOptionPane.showMessageDialog(vistaus, "Cancelado");
             }
+        }
+        
+        if(e.getSource()==vistaus.volverprin){
+            vistaus.dispose();
         }
         
         if(e.getSource()== vistaus.jtbUsuarios){

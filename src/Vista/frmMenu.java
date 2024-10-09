@@ -26,6 +26,7 @@ public class frmMenu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnCalendar = new javax.swing.JLabel();
         btnHome = new javax.swing.JLabel();
+        btnProfile = new javax.swing.JLabel();
         jpContenedor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -37,6 +38,8 @@ public class frmMenu extends javax.swing.JFrame {
 
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/Casa.png"))); // NOI18N
 
+        btnProfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/profile.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -46,13 +49,16 @@ public class frmMenu extends javax.swing.JFrame {
                 .addComponent(btnHome)
                 .addGap(68, 68, 68)
                 .addComponent(btnCalendar)
+                .addGap(69, 69, 69)
+                .addComponent(btnProfile)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnProfile)
                     .addComponent(btnHome)
                     .addComponent(btnCalendar))
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -76,7 +82,7 @@ public class frmMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE))
+                .addComponent(jpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,7 +118,7 @@ public class frmMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmMenu().setVisible(true);
+                initfrmMenu();
             }
         });
     }
@@ -120,6 +126,7 @@ public class frmMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel btnCalendar;
     public javax.swing.JLabel btnHome;
+    public javax.swing.JLabel btnProfile;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     public javax.swing.JPanel jpContenedor;

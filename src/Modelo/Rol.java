@@ -2,7 +2,7 @@ package Modelo;
 
 import java.sql.*;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
+
 
 public class Rol {
     

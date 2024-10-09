@@ -46,7 +46,7 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        volverprin = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JLabel();
         btnEditar = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -144,8 +144,8 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
         jLabel4.setText("Comité");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/back.png"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        volverprin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/back.png"))); // NOI18N
+        jPanel1.add(volverprin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/b.png"))); // NOI18N
         jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 370, -1, -1));
@@ -207,7 +207,7 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmAgregarusuarios().setVisible(true);
+                initfrmAgregarusuarios();
             }
         });
     }
@@ -223,7 +223,6 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -232,5 +231,6 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
     public javax.swing.JTextField txtContraus;
     public javax.swing.JTextField txtCorreous;
     public javax.swing.JTextField txtNombreus;
+    public javax.swing.JLabel volverprin;
     // End of variables declaration//GEN-END:variables
 }

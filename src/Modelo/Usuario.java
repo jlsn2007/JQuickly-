@@ -155,7 +155,7 @@ public class Usuario {
         return resultado;
     }
        
-       //MÃ©todo Encriptar contraseÃ±a, Esto permitirÃ¡ que la contraseÃ±a se 
+       //Método Encriptar contraseÃ±a, Esto permitirÃ¡ que la contraseÃ±a se 
        //guarde de forma segura en la base y dificil de hackear
        
        public String SHA256(String password) {
@@ -177,7 +177,7 @@ public class Usuario {
 	return sb.toString();
        }
        
-    //MÃ©todo Actualizar contraseÃ±a
+    //Método Actualizar contraseÃ±a
        
     public void Actualizarcontra(Usuario usuario){
         
@@ -201,16 +201,20 @@ public class Usuario {
     //MÃ©todo Mostrar datos en la tabla
     
     public void Mostrar(JTable tabla) {
-        //Creamos una variable de la clase conexiÃ³n       
+        //Creamos una variable de la clase conexión       
         Connection conexion = ClaseConexion.getConexion();
+        
         //Definimos el modelo de la tabla
         DefaultTableModel modeloUsuario = new DefaultTableModel();
         modeloUsuario.setColumnIdentifiers(new Object[]{"UUID_Usuario", "nombre", "id_grado", "id_rol", "id_comite", "correo_electronico", "contraseña"});
+        
         try {
-            //Creamos un statement para que se conecte con la base y realice una acciÃ³n         
+            //Creamos un statement para que se conecte con la base y realice una acción         
             Statement statement = conexion.createStatement();
+            
             //Ejecutamos el Statement con la consulta y lo asignamos a una variable de tipo ResultSet          
             ResultSet rs = statement.executeQuery("SELECT * FROM Usuario");
+            
             //Recorremos el ResultSet
             while (rs.next()) {
                 //Llenamos el modelo por cada vez que recorremos el resultSet
@@ -222,18 +226,20 @@ public class Usuario {
                     rs.getString("correo_electronico"), 
                     rs.getString("contraseña")});
             }
+            
             //Asignamos el nuevo modelo lleno a la tabla
             tabla.setModel(modeloUsuario);
+            
         } catch (Exception e) {
             System.out.println("Este es el error en el modelo, metodo mostrar " + e);
         }
     }
     
-    //MÃ©todo Cargar Datos en la tabla
+    //Método Cargar Datos en la tabla
     
     public void cargarDatosTabla(frmAgregarusuarios vista) {
         
-        // ObtÃ©n la fila seleccionada
+        // Obtenemos la fila seleccionada
         int filaSeleccionada = vista.jtbUsuarios.getSelectedRow();
         
         // Debemos asegurarnos que haya una fila seleccionada antes de acceder a sus valores
@@ -261,7 +267,7 @@ public class Usuario {
     // MÃ©todo Guardar Usuario
     
     public void GuardarUsuario(){       
-        //Creamos una variable igual a ejecutar el mÃ©todo de la clase de conexiÃ³n       
+        //Creamos una variable igual a ejecutar el método de la clase de conexión       
         Connection conexion = ClaseConexion.getConexion();
         try {           
             //Creamos el PreparedStatement que ejecutarÃ¡ la Query           
