@@ -36,28 +36,32 @@ public class ctrlReestablecercontrasena implements MouseListener, KeyListener{
         }
          
         if (e.getSource() == VistafrmRescontra.btnSiguiente) {
+            
             String nuevaContra = VistafrmRescontra.txtNewcontra.getText();
             String confirmarContra = VistafrmRescontra.txtNewcontradnv.getText();
 
-            // Validar longitud de la contraseÃ±a nueva
+            // Validar longitud de la contraseña nueva
             if (nuevaContra.length() < 7) {
-                JOptionPane.showMessageDialog(VistafrmRescontra, "La contraseÃ±a debe tener mÃ¡s de 7 caracteres");
+                JOptionPane.showMessageDialog(VistafrmRescontra, "La contraseña debe tener más de 7 caracteres");
                 return;
             }
 
-            // Validar longitud de la confirmaciÃ³n de contraseÃ±a
+            // Validar longitud de la confirmación de contraseña
             if (confirmarContra.length() < 7) {
-                JOptionPane.showMessageDialog(VistafrmRescontra, "La confirmaciÃ³n de la contraseÃ±a debe tener mÃ¡s de 7 caracteres");
+                JOptionPane.showMessageDialog(VistafrmRescontra, "La confirmación de la contraseña debe tener más de 7 caracteres");
                 return;
             }
 
-            // Validar que ambas contraseÃ±as sean iguales
+            // Validar que ambas contraseñas sean iguales
             if (!nuevaContra.equals(confirmarContra)) {
-                JOptionPane.showMessageDialog(VistafrmRescontra, "Las contraseÃ±as no coinciden, favor de verificarlas");
+                JOptionPane.showMessageDialog(VistafrmRescontra, "Las contraseñas no coinciden, favor de verificarlas");
                 return;
             }
-
+            
+            ModeloUsrescontra.Actualizarcontra(ModeloUsrescontra);
+            
             // Si pasa todas las validaciones
+            
             Vista.frmContrasenrestablecida.initfrmContrares();
             VistafrmRescontra.dispose();
         }

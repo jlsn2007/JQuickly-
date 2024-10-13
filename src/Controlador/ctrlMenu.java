@@ -3,7 +3,6 @@ package Controlador;
 
 import Vista.frmMenu;
 import Vista.panelCalendario;
-import Vista.panelPerfil;
 import Vista.panelPrincipal;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -18,9 +17,9 @@ public class ctrlMenu implements MouseListener{
         
         this.vistaa = Vista;
      
-        vistaa.btnProfile.addMouseListener(this);
         vistaa.btnHome.addMouseListener(this);
         vistaa.btnCalendar.addMouseListener(this);
+        vistaa.btncerrarsesion.addMouseListener(this);
 
     }
 
@@ -46,13 +45,9 @@ public class ctrlMenu implements MouseListener{
             vistaa.jpContenedor.repaint();
         }
         
-        if(e.getSource() == vistaa.btnProfile){
-            panelPerfil objprof = new panelPerfil();
-            
-            vistaa.jpContenedor.removeAll();
-            vistaa.jpContenedor.add(objprof);
-            vistaa.jpContenedor.revalidate();
-            vistaa.jpContenedor.repaint();
+        if(e.getSource() == vistaa.btncerrarsesion){
+            Vista.frmLogin.initfrmLogin();
+            vistaa.dispose();
         }
                 
     }

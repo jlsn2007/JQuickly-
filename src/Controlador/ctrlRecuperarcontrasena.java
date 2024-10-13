@@ -1,6 +1,8 @@
 package Controlador;
 
 //import Modelo.EnviarCorreos;
+import Vista.frmAgregarusuarios;
+import Modelo.EnviarCorreos;
 import Modelo.Usuario;
 import Vista.frmRecuperarcontrasena;
 import java.awt.event.KeyEvent;
@@ -15,6 +17,8 @@ public class ctrlRecuperarcontrasena implements MouseListener, KeyListener{
     
     private Usuario ModeloUsrecucontra;
     private frmRecuperarcontrasena VistaRecucontrasena;
+    public static String correoglobal;
+
     
     public ctrlRecuperarcontrasena(Usuario ModeUsRecuperarcontrasena, frmRecuperarcontrasena VisRecuperarcontrasena){
     
@@ -29,40 +33,43 @@ public class ctrlRecuperarcontrasena implements MouseListener, KeyListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
+         
+       if (e.getSource() == VistaRecucontrasena.btnSiguiente) {
+           
+           correoglobal = VistaRecucontrasena.txtCorreorecu.getText();
+           
+        // Validación del correo
+        System.out.println("Se dió clic en el botón siguiente");
         
-        if (!VistaRecucontrasena.txtCorreorecu.getText().contains("@") || !VistaRecucontrasena.txtCorreorecu.getText().contains(".com")) {
-                JOptionPane.showMessageDialog(VistaRecucontrasena, "Ingrese un correo vÃ¡lido");
-                return;
-            } 
-        
-        if(e.getSource() == VistaRecucontrasena.btnSiguiente){
-        
-            Random random = new Random();
-        
-            int numeroAleatorio = 1000 + random.nextInt(9000);
-
-            String recipient = VistaRecucontrasena.txtCorreorecu.getText();
-            String subject = "¡Hey, Recupera tu contraseña rápido!";
-            String content = "Recuerda guardar tu contraseÃ±a en un lugar seguro"
-                    + "para no olvidar de nuevo tu contraseña. "
-                    + ""
-                    + ""
-                    + "Este es el codigo de recuperacion: " + numeroAleatorio;
-
-            
-            Vista.frmCodigoverificacion.initfrmCodigoveri();
-            VistaRecucontrasena.dispose();
+        if (!VistaRecucontrasena.txtCorreorecu.getText().endsWith("@ricaldone.edu.sv")) 
+        {
+            JOptionPane.showMessageDialog(VistaRecucontrasena, "El correo debe terminar con @ricaldone.edu.sv");
             return;
+        } 
+        
+        
+        Random random = new Random();
+        int numeroAleatorio = 1000 + random.nextInt(9000);
 
-        }
+        String recipient = VistaRecucontrasena.txtCorreorecu.getText();
+        String subject = "¡Hey, Recupera tu contraseña rápido!";
+        String content = "Recuerda guardar tu contraseña en un lugar seguro"
+                + " para no olvidar de nuevo tu contraseña. "
+                + ""
+                + "Este es el código de recuperación: " + numeroAleatorio;
         
-       
-        
-        if (e.getSource() == VistaRecucontrasena.Volverrecu) {
-            Vista.frmLogin.initfrmLogin();
-            VistaRecucontrasena.dispose();
-            return;
-        }
+        EnviarCorreos.enviarCorreo(recipient, subject, content);
+
+        Vista.frmCodigoverificacion.initfrmCodigoveri();
+        VistaRecucontrasena.dispose();
+        return;
+    }
+    
+    if (e.getSource() == VistaRecucontrasena.Volverrecu) {
+        Vista.frmLogin.initfrmLogin();
+        VistaRecucontrasena.dispose();
+        return;
+    }
     }
 
     @Override

@@ -41,6 +41,18 @@ public class ctrlCodigoverificacion implements MouseListener, KeyListener{
                 return;
             } 
             
+            // Verificar si el código contiene solo números
+            if (!VisCodigoverificacion.txtCodigo.getText().matches("\\d+")) {
+                JOptionPane.showMessageDialog(VisCodigoverificacion, "El código debe contener solo números");
+                return;
+            }
+            
+            // Verificar si el código tiene exactamente 4 dígitos
+            if (VisCodigoverificacion.txtCodigo.getText().length() != 4) {
+                JOptionPane.showMessageDialog(VisCodigoverificacion, "Longitud del correo inválida");
+                return;
+            }
+            
             Vista.frmReestablecercontrasena.initfrmRescontra();
             VisCodigoverificacion.dispose();
             

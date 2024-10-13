@@ -43,6 +43,8 @@ public class frmAgregareventos extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        cbUsuarios = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,7 +69,7 @@ public class frmAgregareventos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtbEventos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 30, 590, 330));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 580, 320));
 
         txtNombreevento.setBackground(new java.awt.Color(230, 230, 230));
         txtNombreevento.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 12)); // NOI18N
@@ -92,10 +94,10 @@ public class frmAgregareventos extends javax.swing.JFrame {
         btnvolvercalendario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/back.png"))); // NOI18N
         jPanel1.add(btnvolvercalendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Inter 24pt Black", 0, 20)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(215, 62, 84));
-        jLabel2.setText("Agregar eventos");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
+        jLabel2.setText("Agregar Eventos");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, -1, -1));
 
         txtLugar.setBackground(new java.awt.Color(230, 230, 230));
         txtLugar.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 12)); // NOI18N
@@ -122,23 +124,34 @@ public class frmAgregareventos extends javax.swing.JFrame {
         btnAgregareventos.setFont(new java.awt.Font("Inter 24pt Black", 0, 12)); // NOI18N
         btnAgregareventos.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregareventos.setText("Agregar ");
-        jPanel1.add(btnAgregareventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, 160, 45));
+        jPanel1.add(btnAgregareventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, 160, 45));
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/e.png"))); // NOI18N
-        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 370, -1, -1));
+        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 420, -1, -1));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/b.png"))); // NOI18N
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 370, -1, -1));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 420, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(207, 115, 207));
         jLabel5.setText("Editar");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 410, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 460, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(121, 121, 235));
         jLabel6.setText("Eliminar");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 410, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 460, -1, -1));
+
+        cbUsuarios.setBackground(new java.awt.Color(230, 230, 230));
+        cbUsuarios.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 12)); // NOI18N
+        cbUsuarios.setForeground(new java.awt.Color(102, 102, 102));
+        cbUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(cbUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 160, 40));
+
+        jLabel1.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(215, 62, 84));
+        jLabel1.setText("Usuario que lo agrega:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,6 +211,8 @@ public class frmAgregareventos extends javax.swing.JFrame {
     public javax.swing.JLabel btnEditar;
     public javax.swing.JLabel btnEliminar;
     public javax.swing.JLabel btnvolvercalendario;
+    public javax.swing.JComboBox<String> cbUsuarios;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

@@ -26,19 +26,19 @@ public class frmMenu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnCalendar = new javax.swing.JLabel();
         btnHome = new javax.swing.JLabel();
-        btnProfile = new javax.swing.JLabel();
+        btncerrarsesion = new javax.swing.JLabel();
         jpContenedor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(26, 27, 30));
+        jPanel2.setBackground(new java.awt.Color(17, 22, 31));
 
         btnCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/Calen.png"))); // NOI18N
 
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/Casa.png"))); // NOI18N
 
-        btnProfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/profile.png"))); // NOI18N
+        btncerrarsesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/logout.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -49,18 +49,19 @@ public class frmMenu extends javax.swing.JFrame {
                 .addComponent(btnHome)
                 .addGap(68, 68, 68)
                 .addComponent(btnCalendar)
-                .addGap(69, 69, 69)
-                .addComponent(btnProfile)
+                .addGap(72, 72, 72)
+                .addComponent(btncerrarsesion)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnProfile)
-                    .addComponent(btnHome)
-                    .addComponent(btnCalendar))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btncerrarsesion, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnHome)
+                        .addComponent(btnCalendar)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -126,7 +127,7 @@ public class frmMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel btnCalendar;
     public javax.swing.JLabel btnHome;
-    public javax.swing.JLabel btnProfile;
+    public javax.swing.JLabel btncerrarsesion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     public javax.swing.JPanel jpContenedor;

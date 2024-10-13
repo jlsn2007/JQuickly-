@@ -37,12 +37,14 @@ public class panelCalendario extends javax.swing.JPanel {
                 btnAgregareventosActionPerformed(evt);
             }
         });
-        add(btnAgregareventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 160, 45));
+        add(btnAgregareventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, 160, 45));
 
         jCalendar1.setBackground(new java.awt.Color(255, 255, 255));
         jCalendar1.setForeground(new java.awt.Color(0, 0, 0));
         jCalendar1.setDecorationBackgroundColor(new java.awt.Color(255, 255, 255));
-        add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 490, 310));
+        jCalendar1.setMaxSelectableDate(new java.util.Date(253370790083000L));
+        jCalendar1.setMinSelectableDate(new java.util.Date(-62135744317000L));
+        add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 520, 260));
 
         jLabel2.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));

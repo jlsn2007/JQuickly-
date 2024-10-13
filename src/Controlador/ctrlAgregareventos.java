@@ -30,10 +30,10 @@ public class ctrlAgregareventos implements MouseListener{
         this.ModeloUsuario = modeUs;
         
         
-        //this.vistaagregareventos.cbUsuario.addMouseListener(this);
-        //this.ModeloUsuario.CargarComboboxUsuarios(vistaagregareventos.cbUsuario);
+        this.vistaagregareventos.cbUsuarios.addMouseListener(this);
+        this.ModeloUsuario.CargarComboboxUsuarios(vistaagregareventos.cbUsuarios);
             
-        //panel.btnfrmagregareventos.addMouseListener(this);
+        
         vistaa.jpContenedor.addMouseListener(this);
         
         VistaaAgregareventos.btnvolvercalendario.addMouseListener(this);
@@ -47,15 +47,15 @@ public class ctrlAgregareventos implements MouseListener{
         VistaaAgregareventos.txtHora.addMouseListener(this);
         VistaaAgregareventos.jtbEventos.addMouseListener(this);
         
-        /*vistaagregareventos.cbUsuario.addActionListener(e ->{
-            if(e.getSource()== vistaagregareventos.cbUsuario){
-            Usuario selectedItem =(Usuario) vistaagregareventos.cbUsuario.getSelectedItem();
+        vistaagregareventos.cbUsuarios.addActionListener(e ->{
+            if(e.getSource()== vistaagregareventos.cbUsuarios){
+            Usuario selectedItem =(Usuario) vistaagregareventos.cbUsuarios.getSelectedItem();
             if(selectedItem != null){
                 String idus =selectedItem.getUUID_Usuario();
                 ModeloUsuario.setUUID_Usuario(idus);
             }
         }
-        });*/
+        });
         
         ModeloEventos.MostrarEventos(vistaagregareventos.jtbEventos);
         
@@ -69,7 +69,7 @@ public class ctrlAgregareventos implements MouseListener{
             vistaagregareventos.dispose();
         }
         
-        //BotÃ³n para guardar un usuario nuevo
+        //Botón para guardar un usuario nuevo
         
         if(e.getSource()== vistaagregareventos.btnAgregareventos){
             
@@ -85,7 +85,7 @@ public class ctrlAgregareventos implements MouseListener{
             
             if (vistaagregareventos.txtDescripcion.getText().isEmpty()) {
 
-                JOptionPane.showMessageDialog(vistaagregareventos, "La descripciÃ³n del evento es obligatoria");
+                JOptionPane.showMessageDialog(vistaagregareventos, "La descripción del evento es obligatoria");
                 return;
             } 
             
@@ -95,7 +95,7 @@ public class ctrlAgregareventos implements MouseListener{
             
             if (vistaagregareventos.txtLugar.getText().isEmpty()) {
 
-                JOptionPane.showMessageDialog(vistaagregareventos, "La ubicaciÃ³n del evento es obligatoria");
+                JOptionPane.showMessageDialog(vistaagregareventos, "La ubicación del evento es obligatoria");
                 return;
             } 
             
@@ -120,7 +120,7 @@ public class ctrlAgregareventos implements MouseListener{
                 JOptionPane.showMessageDialog(vistaagregareventos, "La hora del evento es obligatoria");
                 return;
             } else {
-              // Verificar si el formato de la hora es vÃ¡lido
+              // Verificar si el formato de la hora es válido
               String hora = vistaagregareventos.txtHora.getText();
               if (!hora.matches("\\d{2}:\\d{2}")) { // HH:MM
                   JOptionPane.showMessageDialog(vistaagregareventos, "La hora debe tener el formato HH:MM");
@@ -134,6 +134,7 @@ public class ctrlAgregareventos implements MouseListener{
             ModeloEventos.setLugar(vistaagregareventos.txtLugar.getText());
             ModeloEventos.setFecha(vistaagregareventos.txtFecha.getText());
             ModeloEventos.setHora(vistaagregareventos.txtHora.getText());
+            ModeloEventos.setUUID_Usuario(ModeloUsuario.getUUID_Usuario());
             
             ModeloEventos.Agregarevento();
             
@@ -145,7 +146,7 @@ public class ctrlAgregareventos implements MouseListener{
             
         }
         
-        // BotÃ³n para editar eventos
+        // Botón para editar eventos
         
         if(e.getSource()== vistaagregareventos.btnEditar){
             
@@ -160,7 +161,7 @@ public class ctrlAgregareventos implements MouseListener{
   
         }
         
-        //BotÃ³n para eliminar eventos
+        //Botón para eliminar eventos
         
         if(e.getSource()== vistaagregareventos.btnEliminar){
             

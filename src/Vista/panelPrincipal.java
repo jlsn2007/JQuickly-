@@ -12,8 +12,11 @@ public class panelPrincipal extends javax.swing.JPanel {
         
         panelPrincipal panel = this;
         frmAgregarusuarios vista = new frmAgregarusuarios();
+        frmAgregarhoras vAgregarhoras = new frmAgregarhoras();
+        frmExpedientes vExpedientes = new frmExpedientes();
+        frmAgregarcomites vComites = new frmAgregarcomites();
         
-        ctrlpanelPrincipal controlador = new ctrlpanelPrincipal(panel, vista);
+        ctrlpanelPrincipal controlador = new ctrlpanelPrincipal(panel, vista, vAgregarhoras, vExpedientes, vComites);
     }
 
 
@@ -22,9 +25,9 @@ public class panelPrincipal extends javax.swing.JPanel {
     private void initComponents() {
 
         btnPagregarus = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnExpedientes = new javax.swing.JButton();
+        btngregarhoras = new javax.swing.JButton();
+        btnAgregarcomites = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -43,25 +46,25 @@ public class panelPrincipal extends javax.swing.JPanel {
         btnPagregarus.setForeground(new java.awt.Color(102, 102, 255));
         btnPagregarus.setText("Agregar Usuarios");
         btnPagregarus.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        add(btnPagregarus, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 170, 140));
+        add(btnPagregarus, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 170, 140));
 
-        jButton2.setBackground(new java.awt.Color(255, 210, 167));
-        jButton2.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 153, 51));
-        jButton2.setText("Expedientes");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, 170, 140));
+        btnExpedientes.setBackground(new java.awt.Color(255, 210, 167));
+        btnExpedientes.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
+        btnExpedientes.setForeground(new java.awt.Color(255, 153, 51));
+        btnExpedientes.setText("Expedientes");
+        add(btnExpedientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, 170, 140));
 
-        jButton3.setBackground(new java.awt.Color(216, 255, 245));
-        jButton3.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 153, 153));
-        jButton3.setText("Agregar horas sociales");
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, 170, 140));
+        btngregarhoras.setBackground(new java.awt.Color(216, 255, 245));
+        btngregarhoras.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
+        btngregarhoras.setForeground(new java.awt.Color(0, 153, 153));
+        btngregarhoras.setText("Agregar Horas Sociales");
+        add(btngregarhoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 170, 140));
 
-        jButton4.setBackground(new java.awt.Color(203, 255, 169));
-        jButton4.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 153, 0));
-        jButton4.setText("Historial de eventos");
-        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 230, 170, 140));
+        btnAgregarcomites.setBackground(new java.awt.Color(203, 255, 169));
+        btnAgregarcomites.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
+        btnAgregarcomites.setForeground(new java.awt.Color(0, 153, 0));
+        btnAgregarcomites.setText("Gestionar Comités");
+        add(btnAgregarcomites, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 230, 170, 140));
 
         jLabel2.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -109,10 +112,10 @@ public class panelPrincipal extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnAgregarcomites;
+    public javax.swing.JButton btnExpedientes;
     public javax.swing.JButton btnPagregarus;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    public javax.swing.JButton btngregarhoras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -1,5 +1,6 @@
 package Modelo;
 
+import Controlador.ctrlRecuperarcontrasena;
 import java.sql.*;
 import java.util.UUID;
 import javax.swing.JTable;
@@ -8,19 +9,20 @@ import Vista.frmAgregarusuarios;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 
 
 public class Usuario {
     
-    //ParÃ¡metros de la tabla Usuarios
+    //Parámetros de la tabla Usuarios
     
     private String UUID_Usuario;
     private String nombre;
     private String correo_electronico;
     private String contraseña;
     
-    //ParÃ¡metros foraneas de la tabla Usuarios
+    //Parámetros foraneas de la tabla Usuarios
     
     int id_grado;
     int id_rol;
@@ -104,7 +106,7 @@ public class Usuario {
    
     try {
         Statement statement = conexion.createStatement();
-        ResultSet rs = statement.executeQuery("SELECT * FROM Usuario WHERE UUID_Usuario IN (2, 3)");
+        ResultSet rs = statement.executeQuery("SELECT * FROM Usuario");
         
         while (rs.next()) {
             String uuidus = rs.getString("UUID_Usuario");
@@ -118,7 +120,7 @@ public class Usuario {
     }
     
        
-    //MÃ©todo iniciar sesiÃ³n    
+    //Método iniciar sesión    
        //El mÃ©todo devuelve un valor booleano (verdadero o falso)
        //Verdadero si existe el usuario y Falso si no existe
     
@@ -149,14 +151,14 @@ public class Usuario {
             }
 
         } catch (SQLException ex) {
-            System.out.println("Error en el modelo: mÃ©todo iniciarSesion " + ex);
+            System.out.println("Error en el modelo: método iniciarSesion " + ex);
         }
 
         return resultado;
     }
        
-       //Método Encriptar contraseÃ±a, Esto permitirÃ¡ que la contraseÃ±a se 
-       //guarde de forma segura en la base y dificil de hackear
+       //Método Encriptar contraseña, Esto permitirá¡ que la contraseña se 
+       //guarde de forma segura en la base y sea dificil de hackear
        
        public String SHA256(String password) {
 	MessageDigest md = null;
@@ -177,20 +179,21 @@ public class Usuario {
 	return sb.toString();
        }
        
-    //Método Actualizar contraseÃ±a
+    //Método Actualizar contraseña
        
     public void Actualizarcontra(Usuario usuario){
-        
-        //Creamos el objeto de la clase conexiÃ³n
+          
+        //Creamos el objeto de la clase conexión
         
         Connection conexion = ClaseConexion.getConexion();
         try{
             
             //Preparamos el prepare statement para que actualice las credenciales
             
-            PreparedStatement smpt = conexion.prepareStatement("UPDATE Usuarion set contraseña = ? WHERE correo_electronico = ?");
+            PreparedStatement smpt = conexion.prepareStatement("UPDATE Usuario set contraseña = ? WHERE correo_electronico = ?");
+            
             smpt.setString(1, usuario.getContraseña());
-            smpt.setString(2, usuario.getCorreo_electronico());
+            smpt.setString(2, ctrlRecuperarcontrasena.correoglobal);
             smpt.executeUpdate();
         }
         catch(SQLException e){
@@ -198,7 +201,7 @@ public class Usuario {
         }
     }
     
-    //MÃ©todo Mostrar datos en la tabla
+    //Método Mostrar datos en la tabla
     
     public void Mostrar(JTable tabla) {
         //Creamos una variable de la clase conexión       
@@ -264,40 +267,56 @@ public class Usuario {
     }
     
     
-    // MÃ©todo Guardar Usuario
+    // Método Guardar Usuario
     
     public void GuardarUsuario(){       
-        //Creamos una variable igual a ejecutar el método de la clase de conexión       
-        Connection conexion = ClaseConexion.getConexion();
-        try {           
-            //Creamos el PreparedStatement que ejecutarÃ¡ la Query           
-            PreparedStatement newUs = conexion.prepareStatement ("Insert into Usuario (UUID_Usuario, nombre, id_grado, id_rol, id_comite, contraseña, correo_electronico) Values (?, ?, ?, ?, ?, ?, ?)");          
-            //Establecer valores de la consulta SQL
-            newUs.setString (1, UUID.randomUUID().toString());
-            newUs.setString (2, getNombre());
-            newUs.setInt (3, getId_grado());
-            newUs.setInt (4, getId_rol());
-            newUs.setInt (5, getId_comite());
-            newUs.setString (6, getContraseña());
-            newUs.setString (7, getCorreo_electronico());
-            
-            //Ejecutar la consulta
-            
-            newUs.executeUpdate();
-        } 
-        
-        catch (SQLException ex) {
-            System.out.println("este es el error en el modelo usuario: metodo guardar " + ex) ;
-        }
-                
-    }
+    // Creamos una variable igual a ejecutar el método de la clase de conexión       
+    Connection conexion = ClaseConexion.getConexion();
     
-    // MÃ©todo Actualizar Usuario
+    try {           
+        // Creamos el PreparedStatement que ejecutará la Query           
+        PreparedStatement newUs = conexion.prepareStatement(
+            "Insert into Usuario (UUID_Usuario, nombre, id_grado, id_rol, id_comite, contraseña, correo_electronico) Values (?, ?, ?, ?, ?, ?, ?)"
+        );          
+        
+        // Establecer valores de la consulta SQL
+        newUs.setString(1, UUID.randomUUID().toString());
+        newUs.setString(2, getNombre());
+        newUs.setInt(3, getId_grado());
+        newUs.setInt(4, getId_rol());
+        newUs.setInt(5, getId_comite());
+        newUs.setString(6, getContraseña());
+        newUs.setString(7, getCorreo_electronico());
+        
+        // Ejecutar la consulta            
+        newUs.executeUpdate();
+        
+    } catch (SQLException ex) {
+        
+        if (ex.getErrorCode() == 2291) { 
+            System.out.println("Error: Clave principal no encontrada para los siguientes IDs:");
+            if (getId_grado() <= 0) {
+                System.out.println("ID Grado: " + getId_grado() + " es inválido.");
+            }
+            if (getId_rol() <= 0) {
+                System.out.println("ID Rol: " + getId_rol() + " es inválido.");
+            }
+            if (getId_comite() <= 0) {
+                System.out.println("ID Comité: " + getId_comite() + " es inválido.");
+            }
+        } else {
+            System.out.println("Este es el error en el modelo usuario: método guardar " + ex);
+        }
+    }
+}
+
+    
+    // Método Actualizar Usuario
     
     public void ActualizarUsuario(JTable tabla){
         //Creamos una variable igual a ejecutar el mÃ©todo de la clase de conexión
         Connection conexion = ClaseConexion.getConexion();
-        //obtenemos que fila seleccionÃ³ el usuario
+        //obtenemos que fila selecciona el usuario
         int filaseleccionada = tabla.getSelectedRow();
         if(filaseleccionada != -1){
             //Obtenemos el id de la fila seleccionada
@@ -325,7 +344,7 @@ public class Usuario {
     }
     
     
-    // MÃ©todo Eliminar Usuario
+    // Método Eliminar Usuario
     
     public void EliminarUsuario(JTable tabla){
         
@@ -349,7 +368,7 @@ public class Usuario {
         }
     }
     
-    //MÃ©todo comprobar Usuario
+    //Método comprobar Usuario
     
     public boolean Usuario(){
         
@@ -373,13 +392,11 @@ public class Usuario {
         } 
         
         catch (Exception ex) {
-            System.out.println("Error en el modÃ©lo: En el mÃ©todo Iniciar sesiÃ³n ha ocurrido: " + ex);
+            System.out.println("Error en el modélo: En el método Iniciar sesión ha ocurrido: " + ex);
         }
         
         return resultado;
     }
-    
-    
     
 }
 

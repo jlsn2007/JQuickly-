@@ -27,6 +27,7 @@ public class frmLogin extends javax.swing.JFrame {
         txtCorreo = new javax.swing.JTextField();
         txtContra = new javax.swing.JTextField();
         btnSiguiente = new javax.swing.JButton();
+        btntxtRecucontra = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,6 +59,11 @@ public class frmLogin extends javax.swing.JFrame {
         btnSiguiente.setForeground(new java.awt.Color(64, 97, 195));
         btnSiguiente.setText("Siguiente");
         jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 330, 200, 45));
+
+        btntxtRecucontra.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
+        btntxtRecucontra.setForeground(new java.awt.Color(40, 160, 160));
+        btntxtRecucontra.setText("¿Has olvidado tu contraseña?");
+        jPanel1.add(btntxtRecucontra, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/login.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -115,6 +121,7 @@ public class frmLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnSiguiente;
+    public javax.swing.JLabel btntxtRecucontra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

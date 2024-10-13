@@ -15,15 +15,14 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
     }
     
     public static void initfrmAgregarusuarios(){
-       frmMenu vista = new frmMenu();
-       panelPrincipal panel = new panelPrincipal();
+      
        frmAgregarusuarios vista2 = new frmAgregarusuarios();
        Rol modeloRol = new Rol();
        Grado modeloGrado = new Grado();
        Comite modeloComite = new Comite();
        Usuario modeloUsuario = new Usuario();
        
-       ctrlAgregarusuarios controlador = new ctrlAgregarusuarios(vista2, vista, panel, modeloRol, modeloGrado, modeloComite, modeloUsuario);
+       ctrlAgregarusuarios controlador = new ctrlAgregarusuarios(vista2, modeloRol, modeloGrado, modeloComite, modeloUsuario);
        
        vista2.setVisible(true);
    }
@@ -57,16 +56,21 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Inter 24pt Black", 0, 20)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(99, 99, 209));
-        jLabel1.setText("Agregar usuarios");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
+        jLabel1.setText("Agregar Usuarios");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, -1, -1));
 
         txtNombreus.setBackground(new java.awt.Color(230, 230, 230));
         txtNombreus.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 12)); // NOI18N
         txtNombreus.setForeground(new java.awt.Color(102, 102, 102));
         txtNombreus.setText("Nombre");
         txtNombreus.setBorder(null);
+        txtNombreus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreusActionPerformed(evt);
+            }
+        });
         jPanel1.add(txtNombreus, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 345, 50));
 
         txtContraus.setBackground(new java.awt.Color(230, 230, 230));
@@ -93,7 +97,7 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
         cbGrado.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 12)); // NOI18N
         cbGrado.setForeground(new java.awt.Color(102, 102, 102));
         cbGrado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(cbGrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 160, 40));
+        jPanel1.add(cbGrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 160, 40));
 
         cbComite.setBackground(new java.awt.Color(230, 230, 230));
         cbComite.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 12)); // NOI18N
@@ -102,10 +106,15 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
         jPanel1.add(cbComite, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 160, 40));
 
         btnAgregarusuarios.setBackground(new java.awt.Color(51, 153, 0));
-        btnAgregarusuarios.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
+        btnAgregarusuarios.setFont(new java.awt.Font("Inter 24pt Black", 0, 12)); // NOI18N
         btnAgregarusuarios.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarusuarios.setText("Agregar");
-        jPanel1.add(btnAgregarusuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 160, 45));
+        btnAgregarusuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarusuariosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAgregarusuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 160, 45));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
@@ -127,41 +136,41 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtbUsuarios);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 580, 330));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 580, 320));
 
         jLabel2.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Rol");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+        jLabel2.setForeground(new java.awt.Color(99, 99, 209));
+        jLabel2.setText("Rol:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Grado");
+        jLabel3.setForeground(new java.awt.Color(99, 99, 209));
+        jLabel3.setText("Grado:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Comité");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
+        jLabel4.setForeground(new java.awt.Color(99, 99, 209));
+        jLabel4.setText("Comité:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
 
         volverprin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/back.png"))); // NOI18N
         jPanel1.add(volverprin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/b.png"))); // NOI18N
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 370, -1, -1));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 420, -1, -1));
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/e.png"))); // NOI18N
-        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 370, -1, -1));
+        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 420, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(207, 115, 207));
         jLabel8.setText("Editar");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 410, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 460, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(121, 121, 235));
         jLabel9.setText("Eliminar");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 410, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 460, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,6 +185,14 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtNombreusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreusActionPerformed
+
+    private void btnAgregarusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarusuariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarusuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,7 +246,7 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jtbUsuarios;
     public javax.swing.JTextField txtContraus;
-    public javax.swing.JTextField txtCorreous;
+    public static javax.swing.JTextField txtCorreous;
     public javax.swing.JTextField txtNombreus;
     public javax.swing.JLabel volverprin;
     // End of variables declaration//GEN-END:variables

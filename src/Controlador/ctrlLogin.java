@@ -19,7 +19,7 @@ public class ctrlLogin implements MouseListener, KeyListener{
         this.ModeloUsuario = usuarios;
         this.Vistalogin = frmlogin;
         
-        //frmlogin.btntxtRecucontra.addMouseListener(this);
+        frmlogin.btntxtRecucontra.addMouseListener(this);
         frmlogin.btnSiguiente.addMouseListener(this);
         frmlogin.txtCorreo.addMouseListener(this);
         frmlogin.txtContra.addMouseListener(this);
@@ -31,46 +31,57 @@ public class ctrlLogin implements MouseListener, KeyListener{
     public void mouseClicked(MouseEvent e) {
         
         if (e.getSource() == Vistalogin.btnSiguiente) {
-            System.out.println("se dio clic");
+            
             ModeloUsuario.setCorreo_electronico(Vistalogin.txtCorreo.getText());
-            ModeloUsuario.setContraseña (ModeloUsuario.SHA256(Vistalogin.txtContra.getText()));
+            ModeloUsuario.setContraseña(ModeloUsuario.SHA256(Vistalogin.txtContra.getText()));
+        
             
-            // Validación del correo electrónico en el login
-            
-            String correo = Vistalogin.txtCorreo.getText();
-            if (!correo.endsWith("@ricaldone.edu.sv")) {
-                JOptionPane.showMessageDialog(Vistalogin, "El correo debe terminar con @ricaldone.edu.sv");
-                return;
-            }
- 
-            // Validación de la conraseña en el login
-            
-            if (ModeloUsuario.SHA256(Vistalogin.txtContra.getText()).length() < 7) {
+        // Validación del correo electrónico en el login
+        String correo = Vistalogin.txtCorreo.getText();
+        
+        if (!correo.endsWith("@ricaldone.edu.sv")) {
+            JOptionPane.showMessageDialog(Vistalogin, "El correo debe terminar con @ricaldone.edu.sv");
+            return;
+        }
 
-                JOptionPane.showMessageDialog(Vistalogin, "La contraseña debe tener más de 7 caracteres");
+        // Validación de la contraseña en el login
+        try {
+                String contrasena = Vistalogin.txtContra.getText();
+                
+                // Validar longitud de la contraseña
+                if (contrasena.length() < 7) {
+                    throw new IllegalArgumentException("La contraseña debe tener más de 7 caracteres.");
+                }
+                
+                // Validar que la contraseña contenga al menos una letra mayúscula y una letra minúscula
+                if (!contrasena.matches(".*[a-z].*") || !contrasena.matches(".*[A-Z].*")) {
+                    throw new IllegalArgumentException("La contraseña debe contener al menos una letra mayúscula y una letra minúscula.");
+                }
+
+                ModeloUsuario.setContraseña(ModeloUsuario.SHA256(contrasena));
+
+            } catch (IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(Vistalogin, ex.getMessage());
                 return;
             } 
-            
-            
-            boolean comprobar = ModeloUsuario.IniciarSesion();
-            
-            if (comprobar == true) {
-                JOptionPane.showMessageDialog(Vistalogin,"¡Bienvenido!");
-            } else {
-                JOptionPane.showMessageDialog(Vistalogin, "Usuario inexistente");
-
-            }
-            
-                Vista.frmMenu.initfrmMenu();
-                Vistalogin.dispose();
-                               
+        
+        boolean comprobar = ModeloUsuario.IniciarSesion();
+        
+        if (comprobar) {
+            JOptionPane.showMessageDialog(Vistalogin, "¡Bienvenido!");
+            Vista.frmMenu.initfrmMenu(); 
+            Vistalogin.dispose();
+        }
+        else {
+            JOptionPane.showMessageDialog(Vistalogin, "Credenciales inválidas");
+             }
         }
         
       
-        /*if (e.getSource() == Vistalogin.btntxtRecucontra) {
+        if (e.getSource() == Vistalogin.btntxtRecucontra) {
             Vista.frmRecuperarcontrasena.initfrmRecucontra();
             Vistalogin.dispose();
-        }*/
+        }
 
     }
 
