@@ -12,6 +12,7 @@ public class ctrlReestablecercontrasena implements MouseListener, KeyListener{
     
     private Usuario ModeloUsrescontra;
     private frmReestablecercontrasena VistafrmRescontra;
+    public static String nuevacontra;
     
     public ctrlReestablecercontrasena(Usuario ModeUsrescontra, frmReestablecercontrasena Visfrmrescontra){
         
@@ -37,6 +38,8 @@ public class ctrlReestablecercontrasena implements MouseListener, KeyListener{
          
         if (e.getSource() == VistafrmRescontra.btnSiguiente) {
             
+            nuevacontra = ModeloUsrescontra.SHA256(VistafrmRescontra.txtNewcontradnv.getText());
+            
             String nuevaContra = VistafrmRescontra.txtNewcontra.getText();
             String confirmarContra = VistafrmRescontra.txtNewcontradnv.getText();
 
@@ -58,8 +61,7 @@ public class ctrlReestablecercontrasena implements MouseListener, KeyListener{
                 return;
             }
             
-            ModeloUsrescontra.Actualizarcontra(ModeloUsrescontra);
-            
+            ModeloUsrescontra.Actualizarcontra(ModeloUsrescontra);            
             // Si pasa todas las validaciones
             
             Vista.frmContrasenrestablecida.initfrmContrares();

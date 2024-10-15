@@ -9,6 +9,9 @@ public class frmCodigoverificacion extends javax.swing.JFrame {
 
     public frmCodigoverificacion() {
         initComponents();
+        setLocationRelativeTo(this);
+        setSize(1015, 532); 
+        setResizable(false);
     }
     
     public static void initfrmCodigoveri(){

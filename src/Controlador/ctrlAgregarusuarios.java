@@ -5,14 +5,14 @@ import Modelo.Grado;
 import Modelo.Rol;
 import Modelo.Usuario;
 import Vista.frmAgregarusuarios;
-import Vista.frmMenu;
-import Vista.panelPrincipal;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 
 
-public class ctrlAgregarusuarios implements MouseListener{
+public class ctrlAgregarusuarios implements MouseListener, KeyListener {
     
     //Creamos los métodos
     
@@ -26,8 +26,6 @@ public class ctrlAgregarusuarios implements MouseListener{
     public ctrlAgregarusuarios(frmAgregarusuarios Vistaus, Rol modeloRol, Grado modeloGrado, Comite modeloComite, Usuario modeloUsuario){
         
         this.vistaus = Vistaus;
-        /*this.vistaa = Vistaa;
-        this.panel = Panel;*/
         this.ModeloRol = modeloRol;
         this.ModeloGrado = modeloGrado;
         this.ModeloComite = modeloComite;
@@ -42,11 +40,15 @@ public class ctrlAgregarusuarios implements MouseListener{
         
         //Mandamos a llamar los elementos de la vista
         
+        Vistaus.txtNombreus.addMouseListener(this);
+        Vistaus.txtCorreous.addMouseListener(this);
+        Vistaus.txtContraus.addMouseListener(this);
         Vistaus.btnAgregarusuarios.addMouseListener(this);
         Vistaus.btnEditar.addMouseListener(this);
         Vistaus.btnEliminar.addMouseListener(this);
         Vistaus.volverprin.addMouseListener(this);
         Vistaus.jtbUsuarios.addMouseListener(this);
+        Vistaus.txtBuscarus.addKeyListener(this);
         
         
         //Cargar los datos del combobox de roles con el método en el modelo Rol
@@ -125,11 +127,9 @@ public class ctrlAgregarusuarios implements MouseListener{
                     throw new IllegalArgumentException("El nombre es obligatorio.");
                 }
                 
-                if (!nombre.matches("[a-zA-Z]+")) {
+                if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
                     throw new IllegalArgumentException("El nombre solo puede contener letras.");
                 }
-                
-                //ModeloUsuario.setNombre(nombre);
             
             } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(vistaus, ex.getMessage());
@@ -143,11 +143,14 @@ public class ctrlAgregarusuarios implements MouseListener{
                 if (correo.isEmpty()) {
                     throw new IllegalArgumentException("El correo es obligatorio.");
                 }
+                
+                if (!correo.equals(correo.toLowerCase())) {
+                    throw new IllegalArgumentException("El correo solo puede contener letras en minúsculas.");
+                }
+                
                 if (!correo.endsWith("@ricaldone.edu.sv")) {
                     throw new IllegalArgumentException("El correo debe terminar con @ricaldone.edu.sv");
                 }
-            
-                //ModeloUsuario.setCorreo_electronico(correo);
             
             } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(vistaus, ex.getMessage());
@@ -166,12 +169,46 @@ public class ctrlAgregarusuarios implements MouseListener{
                     throw new IllegalArgumentException("La contraseña debe contener al menos una letra mayúscula y una letra minúscula.");
                 }
             
-                //ModeloUsuario.setContraseña(ModeloUsuario.SHA256(contrasena));
-            
             } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(vistaus, ex.getMessage());
                 return;
             }
+            
+            // Validación para el ComboBox de Rol
+                
+                try {
+                    if (vistaus.cbRol.getSelectedIndex() == -1 && vistaus.cbRol.isEnabled()) {
+                        throw new IllegalArgumentException("Debe seleccionar un Rol.");
+                    }
+                
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(vistaus, ex.getMessage());
+                    return;
+                }
+            
+            // Validación para el ComboBox de Grado
+                
+                try {
+                    if (vistaus.cbGrado.getSelectedIndex() == -1 && vistaus.cbGrado.isEnabled()) {
+                        throw new IllegalArgumentException("Debe seleccionar un Grado.");
+                    }
+                
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(vistaus, ex.getMessage());
+                    return;
+                }
+                
+                // Validación para el ComboBox de Comité
+                
+                try {
+                    if (vistaus.cbComite.getSelectedIndex() == -1 && vistaus.cbComite.isEnabled()) {
+                        throw new IllegalArgumentException("Debe seleccionar un Comité.");
+                    }
+                
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(vistaus, ex.getMessage());
+                    return;
+                }
             
             ModeloUsuario.setNombre(vistaus.txtNombreus.getText());
             ModeloUsuario.setCorreo_electronico(vistaus.txtCorreous.getText());
@@ -198,7 +235,7 @@ public class ctrlAgregarusuarios implements MouseListener{
                         throw new IllegalArgumentException("El nombre es obligatorio.");
                     }
                     
-                    if (!nombre.matches("[a-zA-Z]+")) {
+                    if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
                         throw new IllegalArgumentException("El nombre solo puede contener letras.");
                     }
                     
@@ -217,12 +254,14 @@ public class ctrlAgregarusuarios implements MouseListener{
                     if (correo.isEmpty()) {
                         throw new IllegalArgumentException("El correo es obligatorio.");
                     }
+                    
+                    if (!correo.equals(correo.toLowerCase())) {
+                    throw new IllegalArgumentException("El correo solo puede contener letras en minúsculas.");
+                }
             
                     if (!correo.endsWith("@ricaldone.edu.sv")) {
                         throw new IllegalArgumentException("El correo debe terminar con @ricaldone.edu.sv.");
                     }
-                    
-                    //ModeloUsuario.setCorreo_electronico(correo); 
                     
                     frmAgregarusuarios.txtCorreous.setText(correo); 
                 } 
@@ -243,8 +282,42 @@ public class ctrlAgregarusuarios implements MouseListener{
                         throw new IllegalArgumentException("La contraseña debe contener al menos una letra mayúscula y una letra minúscula.");
                     }
                     
-                    //ModeloUsuario.setContraseña(ModeloUsuario.SHA256(contrasena));
-                    
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(vistaus, ex.getMessage());
+                    return;
+                }
+                
+                // Validación para el ComboBox de Rol
+                
+                try {
+                    if (vistaus.cbRol.getSelectedIndex() == 0) {
+                        throw new IllegalArgumentException("Debe seleccionar un Rol.");
+                    }
+                
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(vistaus, ex.getMessage());
+                    return;
+                }
+                
+                // Validación para el ComboBox de Grado
+                
+                try {
+                    if (vistaus.cbGrado.getSelectedIndex() == 0) {
+                        throw new IllegalArgumentException("Debe seleccionar un Grado.");
+                    }
+                
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(vistaus, ex.getMessage());
+                    return;
+                }
+                
+                // Validación para el ComboBox de Comité
+                
+                try {
+                    if (vistaus.cbComite.getSelectedIndex() == 0) {
+                        throw new IllegalArgumentException("Debe seleccionar un Comité.");
+                    }
+                
                 } catch (IllegalArgumentException ex) {
                     JOptionPane.showMessageDialog(vistaus, ex.getMessage());
                     return;
@@ -253,6 +326,9 @@ public class ctrlAgregarusuarios implements MouseListener{
             ModeloUsuario.setNombre(vistaus.txtNombreus.getText());
             ModeloUsuario.setCorreo_electronico(vistaus.txtCorreous.getText());
             ModeloUsuario.setContraseña(ModeloUsuario.SHA256(vistaus.txtContraus.getText()));
+            ModeloUsuario.setId_grado(ModeloGrado.getId_grado());
+            ModeloUsuario.setId_rol(ModeloRol.getId_rol());
+            ModeloUsuario.setId_comite(ModeloComite.getId_comite());
             ModeloUsuario.ActualizarUsuario(vistaus.jtbUsuarios);
             ModeloUsuario.Mostrar(vistaus.jtbUsuarios);
             
@@ -272,7 +348,7 @@ public class ctrlAgregarusuarios implements MouseListener{
                 JOptionPane.showMessageDialog(vistaus, "Usuario eliminado.");
             } 
             else {
-                JOptionPane.showMessageDialog(vistaus, "Cancelado");
+                JOptionPane.showMessageDialog(vistaus, "Acción Cancelada");
             }
         }
         
@@ -283,6 +359,15 @@ public class ctrlAgregarusuarios implements MouseListener{
         if(e.getSource() == vistaus.jtbUsuarios){
             ModeloUsuario.cargarDatosTabla(vistaus);
         }
+    }
+    
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
+        if (e.getSource()== vistaus.txtBuscarus){          
+            ModeloUsuario.BuscarUsuario(vistaus.jtbUsuarios, vistaus.txtBuscarus); 
+        }
+        
     }
 
     @Override
@@ -304,5 +389,14 @@ public class ctrlAgregarusuarios implements MouseListener{
     public void mouseExited(MouseEvent e) {
 
     }
-    
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
 }

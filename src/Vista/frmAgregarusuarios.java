@@ -12,6 +12,9 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
 
     public frmAgregarusuarios() {
         initComponents();
+        setLocationRelativeTo(this);
+        setSize(1015, 532); 
+        setResizable(false);
     }
     
     public static void initfrmAgregarusuarios(){
@@ -50,6 +53,7 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
         btnEditar = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        txtBuscarus = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,7 +109,7 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
         cbComite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(cbComite, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 160, 40));
 
-        btnAgregarusuarios.setBackground(new java.awt.Color(51, 153, 0));
+        btnAgregarusuarios.setBackground(new java.awt.Color(99, 99, 209));
         btnAgregarusuarios.setFont(new java.awt.Font("Inter 24pt Black", 0, 12)); // NOI18N
         btnAgregarusuarios.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarusuarios.setText("Agregar");
@@ -134,9 +138,12 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtbUsuarios.setGridColor(new java.awt.Color(112, 78, 197));
+        jtbUsuarios.setSelectionBackground(new java.awt.Color(112, 78, 197));
+        jtbUsuarios.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(jtbUsuarios);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 580, 320));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 580, 300));
 
         jLabel2.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(99, 99, 209));
@@ -171,6 +178,13 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(121, 121, 235));
         jLabel9.setText("Eliminar");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 460, -1, -1));
+
+        txtBuscarus.setBackground(new java.awt.Color(230, 230, 230));
+        txtBuscarus.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 10)); // NOI18N
+        txtBuscarus.setForeground(new java.awt.Color(102, 102, 102));
+        txtBuscarus.setText("Buscar usuario");
+        txtBuscarus.setBorder(null);
+        jPanel1.add(txtBuscarus, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, 380, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -245,6 +259,7 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jtbUsuarios;
+    public javax.swing.JTextField txtBuscarus;
     public javax.swing.JTextField txtContraus;
     public static javax.swing.JTextField txtCorreous;
     public javax.swing.JTextField txtNombreus;

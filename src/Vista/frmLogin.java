@@ -8,8 +8,12 @@ public class frmLogin extends javax.swing.JFrame {
 
     public frmLogin() {
         initComponents();
+        setLocationRelativeTo(this);
+        setSize(1015, 532); 
+        setResizable(false);
+        
     }
-
+    
     public static void initfrmLogin(){
         Usuario Modelo = new Usuario();
         frmLogin Vista = new frmLogin();

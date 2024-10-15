@@ -1,9 +1,11 @@
 package Modelo;
 
 import Vista.frmAgregareventos;
+import Vista.frmAgregareventoscoordi;
 import java.sql.*;
 import java.util.UUID;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class Eventos {
@@ -72,7 +74,95 @@ public class Eventos {
         this.hora = hora;
     }
     
-    // MÃ©todo Guardar Usuario
+    /*//Método cargar combobox eventos
+   
+    public Eventos(){
+    
+    }
+    
+    public Eventos (String uuidev, String nombreev){
+        this.UUID_Evento = uuidev;
+        this.nombre = nombreev;
+    }
+    
+    @Override
+    public String toString(){
+        return nombre;
+    }
+    
+    public void CargarComboboxEventos (JComboBox comboBox) {
+    
+    Connection conexion = ClaseConexion.getConexion();
+    
+    comboBox.removeAllItems();
+   
+    try {
+        Statement statement = conexion.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM Eventos");
+        
+        while (rs.next()) {
+            String uuidev = rs.getString("UUID_Evento");
+            String nombreev = rs.getString("nombre");
+            comboBox.addItem(new Eventos(uuidev, nombreev)); 
+        }
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    }*/
+    
+    
+    //Método Buscar evento
+    
+    public void BuscarEventos(JTable tabla, JTextField txtBuscarev) {
+        //Creamos una variable igual a ejecutar el método de la clase de conexión
+        Connection conexion = ClaseConexion.getConexion();
+
+        //Definimos el modelo de la tabla
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Identificador", "Anfitrión", "Lugar", "Descripcion", "Evento", "Fecha", "Hora"});
+        try {
+            
+            String sql = "SELECT e.UUID_Evento AS Identificador, " +
+                     "u.nombre AS Anfitrión, " +
+                     "e.lugar AS Lugar, " +
+                     "e.descripcion AS Descripcion, " +
+                     "e.nombre AS Evento, " +
+                     "e.fecha AS Fecha, " +
+                     "e.hora AS Hora " +
+                     "FROM Eventos e " +
+                     "LEFT JOIN Usuario u ON e.UUID_Usuario = u.UUID_Usuario " +
+                     "WHERE e.nombre LIKE ? || '%'";
+            
+            PreparedStatement deleteEstudiante = conexion.prepareStatement(sql);
+            deleteEstudiante.setString(1, txtBuscarev.getText());
+            ResultSet rs = deleteEstudiante.executeQuery();
+
+            while (rs.next()) {
+                //Llenamos el modelo por cada vez que recorremos el resultSet
+                modelo.addRow(new Object[]{
+                    rs.getString("Identificador"),
+                    rs.getString("Anfitrión"), 
+                    rs.getString("Lugar"),
+                    rs.getString("Descripcion"),
+                    rs.getString("Evento"),
+                    rs.getString("Fecha"), 
+                    rs.getString("Hora")
+                });
+            }
+
+            //Asignamos el nuevo modelo lleno a la tabla
+            tabla.setModel(modelo);
+            tabla.getColumnModel().getColumn(0).setMinWidth(0);
+            tabla.getColumnModel().getColumn(0).setMaxWidth(0);
+            tabla.getColumnModel().getColumn(0).setWidth(0);
+            
+        } catch (Exception e) {
+            System.out.println("Error en metodo buscar eventos: " + e);
+        }
+    }
+
+    // Método Guardar Usuario
     
     public void Agregarevento(){       
         //Creamos una variable igual a ejecutar el mÃ©todo de la clase de conexiÃ³n       
@@ -114,6 +204,7 @@ public class Eventos {
             try{
                 //Ejecutamos la Query
                 PreparedStatement Updtev = conexion.prepareStatement("UPDATE Eventos set UUID_Usuario =?, lugar =?, descripcion =?, nombre =?, fecha =?, hora =? WHERE UUID_Evento =?");
+                
                 Updtev.setString(1, getUUID_Usuario());
                 Updtev.setString(2, getLugar());
                 Updtev.setString (3, getDescripcion());
@@ -166,32 +257,46 @@ public class Eventos {
         //Creamos una variable de la clase conexiÃ³n       
         Connection conexion = ClaseConexion.getConexion();
         //Definimos el modelo de la tabla
-        DefaultTableModel modeloUsuario = new DefaultTableModel();
-        modeloUsuario.setColumnIdentifiers(new Object[]{"UUID_Evento", "UUID_Usuario", "lugar", "descripcion", "nombre", "fecha", "hora"});
+        DefaultTableModel modeloEventos = new DefaultTableModel();
+        
+        modeloEventos.setColumnIdentifiers(new Object[]{"Identificador", "Anfitrión", "Lugar", "Descripcion", "Evento", "Fecha", "Hora"});
+        
         try {
-            //Creamos un statement para que se conecte con la base y realice una acciÃ³n         
+            //Creamos un statement para que se conecte con la base y realice una acción         
             Statement statement = conexion.createStatement();
+            
+            String sql = "SELECT e.UUID_Evento AS Identificador, " +
+                         "u.nombre AS Anfitrión, " +
+                         "e.lugar AS Lugar, " +
+                         "e.descripcion AS Descripcion, " +
+                         "e.nombre AS Evento, " +
+                         "e.fecha AS Fecha, " +
+                         "e.hora AS Hora " +
+                         "FROM Eventos e " +
+                         "LEFT JOIN Usuario u ON e.UUID_Usuario = u.UUID_Usuario";
+            
             //Ejecutamos el Statement con la consulta y lo asignamos a una variable de tipo ResultSet          
-            ResultSet rs = statement.executeQuery("SELECT * FROM Eventos");
+            ResultSet rs = statement.executeQuery(sql);
             //Recorremos el ResultSet
             while (rs.next()) {
                 //Llenamos el modelo por cada vez que recorremos el resultSet
-                modeloUsuario.addRow(new Object[]{rs.getString("UUID_Evento"), 
-                    rs.getString("UUID_Usuario"), 
-                    rs.getString("lugar"),
-                    rs.getString("descripcion"),
-                    rs.getString("nombre"),
-                    rs.getString("fecha"), 
-                    rs.getString("hora")});
+                modeloEventos.addRow(new Object[]{
+                    rs.getString("Identificador"),
+                    rs.getString("Anfitrión"), 
+                    rs.getString("Lugar"),
+                    rs.getString("Descripcion"),
+                    rs.getString("Evento"),
+                    rs.getString("Fecha"), 
+                    rs.getString("Hora")});
             }
             //Asignamos el nuevo modelo lleno a la tabla
-            tabla.setModel(modeloUsuario);
+            tabla.setModel(modeloEventos);
         } catch (Exception e) {
             System.out.println("Este es el error en el modelo, metodo mostrar eventos " + e);
         }
     }
     
-    //MÃ©todo Cargar Datos en la tabla
+    //Método Cargar Datos en la tabla
     
     public void cargarDatosTabla(frmAgregareventos vista) {
         
@@ -210,7 +315,36 @@ public class Eventos {
 
             // Establece los valores en los campos de texto
             
-            //vista.cbUsuario.setSelectedItem(UUID_Usuario);
+            vista.cbUsuarios.setSelectedItem(UUID_Usuario);
+            vista.txtLugar.setText(lugar);
+            vista.txtDescripcion.setText(descripcion);
+            vista.txtNombreevento.setText(nombre);
+            vista.txtFecha.setText(fecha);
+            vista.txtHora.setText(hora);
+            
+        }
+    }
+    
+    //Método Cargar Datos en la tabla eventos del coordinador
+    
+    public void cargarDatosTablacoordi(frmAgregareventoscoordi vista) {
+        
+        // ObtÃ©n la fila seleccionada
+        int filaSeleccionada = vista.jtbEventosc.getSelectedRow();
+        
+        // Debemos asegurarnos que haya una fila seleccionada antes de acceder a sus valores
+        if (filaSeleccionada != -1) {
+            String UUID_Evento = vista.jtbEventosc.getValueAt(filaSeleccionada, 0).toString();
+            String UUID_Usuario = vista.jtbEventosc.getValueAt(filaSeleccionada, 1).toString();
+            String lugar = (vista.jtbEventosc.getValueAt(filaSeleccionada, 2).toString());
+            String descripcion = (vista.jtbEventosc.getValueAt(filaSeleccionada, 3).toString());
+            String nombre = (vista.jtbEventosc.getValueAt(filaSeleccionada, 4).toString());
+            String fecha = vista.jtbEventosc.getValueAt(filaSeleccionada, 5).toString();
+            String hora = vista.jtbEventosc.getValueAt(filaSeleccionada, 6).toString();
+
+            // Establece los valores en los campos de texto
+            
+            vista.cbUsuarios.setSelectedItem(UUID_Usuario);
             vista.txtLugar.setText(lugar);
             vista.txtDescripcion.setText(descripcion);
             vista.txtNombreevento.setText(nombre);

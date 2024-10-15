@@ -10,9 +10,13 @@ public class frmAgregareventos extends javax.swing.JFrame {
 
     public frmAgregareventos() {
         initComponents();
+        setLocationRelativeTo(this);
+        setSize(1015, 532); 
+        setResizable(false);
     }
     
     public static void initfrmAgregareventos(){  
+        
         frmMenu vistaMenuAdmin = new frmMenu();
         panelCalendario panelCalendadio = new panelCalendario();
         frmAgregareventos vistaAgregareventos = new frmAgregareventos();
@@ -22,6 +26,7 @@ public class frmAgregareventos extends javax.swing.JFrame {
         ctrlAgregareventos controlador = new ctrlAgregareventos(vistaMenuAdmin, panelCalendadio, vistaAgregareventos, modeloEventos, modeloUsuario);
         
         vistaAgregareventos.setVisible(true);
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -45,6 +50,7 @@ public class frmAgregareventos extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         cbUsuarios = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        txtBuscarev = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,9 +73,10 @@ public class frmAgregareventos extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtbEventos.setGridColor(new java.awt.Color(153, 0, 0));
         jScrollPane1.setViewportView(jtbEventos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 580, 320));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 580, 300));
 
         txtNombreevento.setBackground(new java.awt.Color(230, 230, 230));
         txtNombreevento.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 12)); // NOI18N
@@ -111,7 +118,7 @@ public class frmAgregareventos extends javax.swing.JFrame {
         txtFecha.setForeground(new java.awt.Color(102, 102, 102));
         txtFecha.setText("Fecha");
         txtFecha.setBorder(null);
-        jPanel1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 165, 50));
+        jPanel1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 160, 50));
 
         txtHora.setBackground(new java.awt.Color(230, 230, 230));
         txtHora.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 12)); // NOI18N
@@ -152,6 +159,13 @@ public class frmAgregareventos extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(215, 62, 84));
         jLabel1.setText("Usuario que lo agrega:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, -1));
+
+        txtBuscarev.setBackground(new java.awt.Color(230, 230, 230));
+        txtBuscarev.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 10)); // NOI18N
+        txtBuscarev.setForeground(new java.awt.Color(102, 102, 102));
+        txtBuscarev.setText("Buscar evento");
+        txtBuscarev.setBorder(null);
+        jPanel1.add(txtBuscarev, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, 380, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,6 +233,7 @@ public class frmAgregareventos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jtbEventos;
+    public javax.swing.JTextField txtBuscarev;
     public javax.swing.JTextField txtDescripcion;
     public javax.swing.JTextField txtFecha;
     public javax.swing.JTextField txtHora;

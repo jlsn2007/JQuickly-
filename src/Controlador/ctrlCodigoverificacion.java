@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.EnviarCorreos;
 import Modelo.Usuario;
 import Vista.frmCodigoverificacion;
 import java.awt.event.KeyEvent;

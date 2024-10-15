@@ -24,8 +24,8 @@ public class panelPrincipal extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnPagregarus = new javax.swing.JButton();
         btnExpedientes = new javax.swing.JButton();
+        btnPagregarus = new javax.swing.JButton();
         btngregarhoras = new javax.swing.JButton();
         btnAgregarcomites = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -38,6 +38,11 @@ public class panelPrincipal extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+        btnExpedientes.setBackground(new java.awt.Color(255, 210, 167));
+        btnExpedientes.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
+        btnExpedientes.setForeground(new java.awt.Color(255, 153, 51));
+        btnExpedientes.setText("Expedientes");
+
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -47,12 +52,6 @@ public class panelPrincipal extends javax.swing.JPanel {
         btnPagregarus.setText("Agregar Usuarios");
         btnPagregarus.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         add(btnPagregarus, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 170, 140));
-
-        btnExpedientes.setBackground(new java.awt.Color(255, 210, 167));
-        btnExpedientes.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
-        btnExpedientes.setForeground(new java.awt.Color(255, 153, 51));
-        btnExpedientes.setText("Expedientes");
-        add(btnExpedientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, 170, 140));
 
         btngregarhoras.setBackground(new java.awt.Color(216, 255, 245));
         btngregarhoras.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
@@ -64,12 +63,12 @@ public class panelPrincipal extends javax.swing.JPanel {
         btnAgregarcomites.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
         btnAgregarcomites.setForeground(new java.awt.Color(0, 153, 0));
         btnAgregarcomites.setText("Gestionar Comités");
-        add(btnAgregarcomites, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 230, 170, 140));
+        add(btnAgregarcomites, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, 170, 140));
 
-        jLabel2.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("¡Es bueno volver a verte!");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, -1));
+        jLabel2.setText("¡Admin, Es bueno volver a verte!");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Inter 24pt SemiBold", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));

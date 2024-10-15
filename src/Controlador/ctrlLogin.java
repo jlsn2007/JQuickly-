@@ -2,6 +2,8 @@ package Controlador;
 
 import Modelo.Usuario;
 import Vista.frmLogin;
+import Vista.frmMenu;
+import Vista.frmMenucoordi;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -18,6 +20,7 @@ public class ctrlLogin implements MouseListener, KeyListener{
         
         this.ModeloUsuario = usuarios;
         this.Vistalogin = frmlogin;
+        
         
         frmlogin.btntxtRecucontra.addMouseListener(this);
         frmlogin.btnSiguiente.addMouseListener(this);
@@ -65,17 +68,30 @@ public class ctrlLogin implements MouseListener, KeyListener{
                 return;
             } 
         
-        boolean comprobar = ModeloUsuario.IniciarSesion();
-        
-        if (comprobar) {
+        int id_rol = ModeloUsuario.IniciarSesion();
+
+        if (id_rol != -1) {  
             JOptionPane.showMessageDialog(Vistalogin, "¡Bienvenido!");
-            Vista.frmMenu.initfrmMenu(); 
-            Vistalogin.dispose();
-        }
-        else {
+
+            // Redirigir según el rol
+            if (id_rol == 2) {
+                // Redirigir a la interfaz de Coordinador
+                frmMenucoordi menuCoordi = new frmMenucoordi();
+                menuCoordi.initfrmMenucoordi();  
+                
+                
+            } else if (id_rol == 3) {
+                // Redirigir a la interfaz de Alumno
+                frmMenu menu = new frmMenu();
+                menu.initfrmMenu();  
+                
+            }
+
+            Vistalogin.dispose();  // Cerrar la ventana de login
+        } else {
             JOptionPane.showMessageDialog(Vistalogin, "Credenciales inválidas");
-             }
         }
+    }
         
       
         if (e.getSource() == Vistalogin.btntxtRecucontra) {
@@ -87,7 +103,7 @@ public class ctrlLogin implements MouseListener, KeyListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        
     }
 
     @Override

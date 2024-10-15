@@ -9,6 +9,9 @@ public class frmReestablecercontrasena extends javax.swing.JFrame {
 
     public frmReestablecercontrasena() {
         initComponents();
+        setLocationRelativeTo(this);
+        setSize(1015, 532); 
+        setResizable(false);
     }
     
     public static void initfrmRescontra(){

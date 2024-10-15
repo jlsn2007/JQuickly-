@@ -24,8 +24,7 @@ public class ctrlpanelCalendario implements MouseListener {
         
         if(e.getSource() == panel.btnAgregareventos){ 
             Vista.frmAgregareventos.initfrmAgregareventos();
-            vistaa.dispose();
-            
+            vistaa.dispose(); 
         }
         
     }

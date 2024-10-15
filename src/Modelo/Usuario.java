@@ -1,15 +1,18 @@
 package Modelo;
 
 import Controlador.ctrlRecuperarcontrasena;
+import Controlador.ctrlReestablecercontrasena;
 import java.sql.*;
 import java.util.UUID;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Vista.frmAgregarusuarios;
+import Vista.frmMenu;
+import Vista.frmMenucoordi;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 
 
@@ -106,7 +109,28 @@ public class Usuario {
    
     try {
         Statement statement = conexion.createStatement();
-        ResultSet rs = statement.executeQuery("SELECT * FROM Usuario");
+        ResultSet rs = statement.executeQuery("SELECT * FROM Usuario WHERE id_rol IN (2, 3)");
+        
+        while (rs.next()) {
+            String uuidus = rs.getString("UUID_Usuario");
+            String nombre = rs.getString("nombre");
+            comboBox.addItem(new Usuario(uuidus, nombre)); 
+        }
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    }
+    
+    //Método combobox de alumnos a quien agregar horas
+    
+    public void CargarComboboxAlumnos (JComboBox comboBox) {
+    Connection conexion = ClaseConexion.getConexion();
+    comboBox.removeAllItems();
+   
+    try {
+        Statement statement = conexion.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM Usuario WHERE id_rol = 1 ");
         
         while (rs.next()) {
             String uuidus = rs.getString("UUID_Usuario");
@@ -120,45 +144,34 @@ public class Usuario {
     }
     
        
-    //Método iniciar sesión    
-       //El mÃ©todo devuelve un valor booleano (verdadero o falso)
-       //Verdadero si existe el usuario y Falso si no existe
+    // Método iniciar sesión
     
-       public boolean IniciarSesion() {
-           
-        //Obtenemos la Conexion con la base de datos
-           
-        Connection conexion = ClaseConexion.getConexion();
-        boolean resultado = false;
+    public int IniciarSesion() {
 
-        try {
-            
-            //Preparamos la consulta SQL para verificar el usuario
-            
-            String sql = "SELECT * FROM Usuario WHERE correo_electronico = ? AND contraseña = ?";
-            PreparedStatement statement = conexion.prepareStatement(sql);
-            statement.setString(1, getCorreo_electronico());
-            statement.setString(2, getContraseña());
+    Connection conexion = ClaseConexion.getConexion();
+    int id_rol = -1;  // Retornamos -1 si el inicio de sesión falla
 
-            //Ejecutamos la consulta
-            
-            ResultSet resultSet = statement.executeQuery();
+    try {
+        String sql = "SELECT id_rol FROM Usuario WHERE correo_electronico = ? AND contraseña = ? AND (id_rol = 2 OR id_rol = 3)";
+        PreparedStatement statement = conexion.prepareStatement(sql);
+        statement.setString(1, getCorreo_electronico());
+        statement.setString(2, getContraseña());
 
-            //Si hay un resultado, significa que el usuario existe y la contraseÃ±a es correcta
-            
-            if (resultSet.next()) {
-                resultado = true;
-            }
+        ResultSet resultSet = statement.executeQuery();
 
-        } catch (SQLException ex) {
-            System.out.println("Error en el modelo: método iniciarSesion " + ex);
+        if (resultSet.next()) {
+            id_rol = resultSet.getInt("id_rol");  // Obtener el id_rol del usuario
         }
 
-        return resultado;
+    } catch (SQLException ex) {
+        System.out.println("Error en el método Iniciar Sesion: " + ex);
     }
+
+    return id_rol;
+}
+    
        
-       //Método Encriptar contraseña, Esto permitirá¡ que la contraseña se 
-       //guarde de forma segura en la base y sea dificil de hackear
+       //Método Encriptar contraseña
        
        public String SHA256(String password) {
 	MessageDigest md = null;
@@ -192,7 +205,7 @@ public class Usuario {
             
             PreparedStatement smpt = conexion.prepareStatement("UPDATE Usuario set contraseña = ? WHERE correo_electronico = ?");
             
-            smpt.setString(1, usuario.getContraseña());
+            smpt.setString(1, ctrlReestablecercontrasena.nuevacontra);
             smpt.setString(2, ctrlRecuperarcontrasena.correoglobal);
             smpt.executeUpdate();
         }
@@ -209,25 +222,38 @@ public class Usuario {
         
         //Definimos el modelo de la tabla
         DefaultTableModel modeloUsuario = new DefaultTableModel();
-        modeloUsuario.setColumnIdentifiers(new Object[]{"UUID_Usuario", "nombre", "id_grado", "id_rol", "id_comite", "correo_electronico", "contraseña"});
+        modeloUsuario.setColumnIdentifiers(new Object[]{"UUID_Usuario", "Nombre", "Grado", "Rol", "Comite", "Correo", "Contraseña"});
         
         try {
             //Creamos un statement para que se conecte con la base y realice una acción         
             Statement statement = conexion.createStatement();
             
+            String sql = "SELECT "
+                + "u.UUID_Usuario AS UUID_Usuario, "
+                + "u.nombre AS Nombre, "
+                + "g.grado AS Grado, " 
+                + "r.tipo_rol AS Rol, " 
+                + "c.comite AS Comite, " 
+                + "u.correo_electronico AS Correo, "
+                + "u.contraseña AS Contraseña "
+                + "FROM Usuario u "
+                + "LEFT JOIN Grado g ON u.id_grado = g.id_grado "
+                + "LEFT JOIN Rol r ON u.id_rol = r.id_rol "
+                + "LEFT JOIN Comite c ON u.id_comite = c.id_comite";
+            
             //Ejecutamos el Statement con la consulta y lo asignamos a una variable de tipo ResultSet          
-            ResultSet rs = statement.executeQuery("SELECT * FROM Usuario");
+            ResultSet rs = statement.executeQuery(sql);
             
             //Recorremos el ResultSet
             while (rs.next()) {
                 //Llenamos el modelo por cada vez que recorremos el resultSet
                 modeloUsuario.addRow(new Object[]{rs.getString("UUID_Usuario"), 
-                    rs.getString("nombre"), 
-                    rs.getInt("id_grado"),
-                    rs.getInt("id_rol"),
-                    rs.getInt("id_comite"),
-                    rs.getString("correo_electronico"), 
-                    rs.getString("contraseña")});
+                    rs.getString("Nombre"), 
+                    rs.getString("Grado"),
+                    rs.getString("Rol"),
+                    rs.getString("Comite"),
+                    rs.getString("Correo"), 
+                    rs.getString("Contraseña")});
             }
             
             //Asignamos el nuevo modelo lleno a la tabla
@@ -249,9 +275,9 @@ public class Usuario {
         if (filaSeleccionada != -1) {
             String UUID_Usuario = vista.jtbUsuarios.getValueAt(filaSeleccionada, 0).toString();
             String nombre = vista.jtbUsuarios.getValueAt(filaSeleccionada, 1).toString();
-            int id_grado = Integer.parseInt(vista.jtbUsuarios.getValueAt(filaSeleccionada, 2).toString());
-            int id_rol = Integer.parseInt(vista.jtbUsuarios.getValueAt(filaSeleccionada, 3).toString());
-            int id_comite = Integer.parseInt(vista.jtbUsuarios.getValueAt(filaSeleccionada, 4).toString());
+            String id_grado = vista.jtbUsuarios.getValueAt(filaSeleccionada, 2).toString();
+            String id_rol = vista.jtbUsuarios.getValueAt(filaSeleccionada, 3).toString();
+            String id_comite = vista.jtbUsuarios.getValueAt(filaSeleccionada, 4).toString();
             String correo_electronico = vista.jtbUsuarios.getValueAt(filaSeleccionada, 5).toString();
             String contraseña = vista.jtbUsuarios.getValueAt(filaSeleccionada, 6).toString();
 
@@ -264,6 +290,7 @@ public class Usuario {
             vista.txtCorreous.setText(correo_electronico);
             vista.txtContraus.setText(contraseña);
         }
+        
     }
     
     
@@ -368,36 +395,51 @@ public class Usuario {
         }
     }
     
-    //Método comprobar Usuario
+    //Método buscar Usuario
     
-    public boolean Usuario(){
+    public void BuscarUsuario(JTable tabla, JTextField miTextField) {
         
+        //Creamos una variable igual a ejecutar el método de la clase de conexión
         Connection conexion = ClaseConexion.getConexion();
-        boolean resultado = false;
-        
+
+        //Definimos el modelo de la tabla
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"UUID_Usuario", "Nombre", "Grado", "Rol", "Comite", "Contraseña", "Correo"});
         try {
-          
-            String sql = "Select * from Usuario WHERE correo_electronico = ? AND contraseña = ?";
-            PreparedStatement statement = conexion.prepareStatement(sql);
             
-            statement.setString(1,getCorreo_electronico());
-            statement.setString(2,getContraseña());
+            String sql = "SELECT "
+                + "u.UUID_Usuario AS UUID_Usuario, "
+                + "u.nombre AS Nombre, "
+                + "g.grado AS Grado, " 
+                + "r.tipo_rol AS Rol, " 
+                + "c.comite AS Comite, " 
+                + "u.correo_electronico AS Correo, "
+                + "u.contraseña AS Contraseña "
+                + "FROM Usuario u "
+                + "LEFT JOIN Grado g ON u.id_grado = g.id_grado "
+                + "LEFT JOIN Rol r ON u.id_rol = r.id_rol "
+                + "LEFT JOIN Comite c ON u.id_comite = c.id_comite "
+                + "WHERE u.nombre LIKE ? || '%'";
             
-            ResultSet resultSet = statement.executeQuery();
-            
-            if (resultSet.next()) {
-                resultado = true;
+            PreparedStatement deleteEstudiante = conexion.prepareStatement(sql);
+            deleteEstudiante.setString(1, miTextField.getText());
+            ResultSet rs = deleteEstudiante.executeQuery();
+
+            while (rs.next()) {
+                //Llenamos el modelo por cada vez que recorremos el resultSet
+                modelo.addRow(new Object[]{rs.getString("UUID_Usuario"), rs.getString("Nombre"), rs.getString("Grado"), rs.getString("Rol"), rs.getString("Comite"), rs.getString("Contraseña"), rs.getString("Correo")});
             }
 
-        } 
-        
-        catch (Exception ex) {
-            System.out.println("Error en el modélo: En el método Iniciar sesión ha ocurrido: " + ex);
+            //Asignamos el nuevo modelo lleno a la tabla
+            tabla.setModel(modelo);
+            tabla.getColumnModel().getColumn(0).setMinWidth(0);
+            tabla.getColumnModel().getColumn(0).setMaxWidth(0);
+            tabla.getColumnModel().getColumn(0).setWidth(0);
+            
+        } catch (Exception e) {
+            System.out.println("Error en metodo buscar usuarios: " + e);
         }
-        
-        return resultado;
     }
-    
 }
 
 
