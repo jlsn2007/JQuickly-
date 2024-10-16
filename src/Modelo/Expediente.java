@@ -3,7 +3,6 @@ package Modelo;
 import Vista.frmAgregarhoras;
 import Vista.frmAgregarhorascoordi;
 import java.sql.*;
-import java.util.UUID;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -57,13 +56,13 @@ public class Expediente {
         //Definimos el modelo de la tabla
         DefaultTableModel modeloExpedientes = new DefaultTableModel();
         
-        modeloExpedientes.setColumnIdentifiers(new Object[]{"Expediente", "Usuario", "Evento", "Horas_Agregadas"});
+        modeloExpedientes.setColumnIdentifiers(new Object[]{"Expediente", "Alumno", "Evento", "Horas_Agregadas"});
         
         try {
             //Creamos un statement para que se conecte con la base y realice una acción         
             Statement statement = conexion.createStatement();
             
-            String sql = "SELECT u.nombre AS Usuario, "
+            String sql = "SELECT u.nombre AS Alumno, "
                        + "ex.UUID_expediente AS Expediente, "
                        + "ex.nombre_evento AS Evento, "
                        + "ex.horas_agregadas AS Horas_Agregadas " +
@@ -78,7 +77,7 @@ public class Expediente {
                 //Llenamos el modelo por cada vez que recorremos el resultSet
                 modeloExpedientes.addRow(new Object[]{
                     rs.getString("Expediente"), 
-                    rs.getString("Usuario"), 
+                    rs.getString("Alumno"), 
                     rs.getString("Evento"),
                     rs.getString("Horas_Agregadas")
                     });

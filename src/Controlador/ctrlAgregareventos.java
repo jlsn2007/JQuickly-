@@ -9,6 +9,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 
 
@@ -75,29 +78,65 @@ public class ctrlAgregareventos implements MouseListener, KeyListener{
         
         if(e.getSource()== vistaagregareventos.btnAgregareventos){
             
+            String nombreEvento = vistaagregareventos.txtNombreevento.getText().trim();
+            
             //Validaciones para el nombre del evento
             
-            if (vistaagregareventos.txtNombreevento.getText().isEmpty()) {
+            if (nombreEvento.isEmpty()) {
 
                 JOptionPane.showMessageDialog(vistaagregareventos, "El nombre del evento es obligatorio");
                 return;
             }
             
+            if (!Character.isUpperCase(nombreEvento.charAt(0))) {
+                JOptionPane.showMessageDialog(vistaagregareventos, "El nombre del evento debe comenzar con mayúscula");
+                return;
+            }
+            
+            if (!nombreEvento.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]+")) {
+                JOptionPane.showMessageDialog(vistaagregareventos, "No se permiten carácteres especiales en el nombre del evento");
+                return;
+            }
+            
             //Validaciones para la descripción del evento
             
-            if (vistaagregareventos.txtDescripcion.getText().isEmpty()) {
+            String descripcionEvento = vistaagregareventos.txtDescripcion.getText().trim();
+            
+            if (descripcionEvento.isEmpty()) {
 
                 JOptionPane.showMessageDialog(vistaagregareventos, "La descripción del evento es obligatoria");
                 return;
             } 
             
+            if (!Character.isUpperCase(descripcionEvento.charAt(0))) {
+                JOptionPane.showMessageDialog(vistaagregareventos, "La descripción del evento debe comenzar con mayúscula");
+                return;
+            }
+            
+            if (!descripcionEvento.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]+")) {
+                JOptionPane.showMessageDialog(vistaagregareventos, "No se permiten carácteres especiales en la descripción");
+                return;
+            }
+            
             //Validaciones para el lugar del evento
             
-            if (vistaagregareventos.txtLugar.getText().isEmpty()) {
+            String lugarEvento = vistaagregareventos.txtLugar.getText().trim();
+            
+            if (lugarEvento.isEmpty()) {
 
                 JOptionPane.showMessageDialog(vistaagregareventos, "La ubicación del evento es obligatoria");
                 return;
             } 
+            
+            if (!Character.isUpperCase(lugarEvento.charAt(0))) {
+                JOptionPane.showMessageDialog(vistaagregareventos, "La ubicación del evento debe comenzar con mayúscula");
+                return;
+            }
+            
+            if (!lugarEvento.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]+")) {
+                JOptionPane.showMessageDialog(vistaagregareventos, "No se permiten carácteres especiales en la descripción");
+                return;
+            }
             
             //Validaciones para la fecha del evento
             
@@ -107,7 +146,7 @@ public class ctrlAgregareventos implements MouseListener, KeyListener{
             } 
             
             else { 
-              // Verificar si el formato de la fecha es válido
+
               String fecha = vistaagregareventos.txtFecha.getText();
               
               if (!fecha.matches("\\d{2}-\\d{2}-\\d{4}")) { // DD-MM-YYY
@@ -151,7 +190,23 @@ public class ctrlAgregareventos implements MouseListener, KeyListener{
                       return;
                   }
               }
+              
+              try {
+
+                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                  LocalDate fechaIngresada = LocalDate.parse(fecha, formatter);
+                  LocalDate fechaActual = LocalDate.now(); 
+        
+                  if (fechaIngresada.isBefore(fechaActual)) {
+                      JOptionPane.showMessageDialog(vistaagregareventos, "La fecha del evento debe ser actual o futura");
+                      return;
+                  }
+              
+              } catch (DateTimeParseException ex) {
+                  JOptionPane.showMessageDialog(vistaagregareventos, "La fecha ingresada no es válida");
+              }
             } 
+            
             
             //Validaciones para la hora del evento
             
@@ -184,16 +239,10 @@ public class ctrlAgregareventos implements MouseListener, KeyListener{
             
             //Validación para el combobox Usuarios
             
-            try {
-                if (vistaagregareventos.cbUsuarios.getSelectedIndex() == 0) {
-                    throw new IllegalArgumentException("Debe seleccionar un Usuario.");
+                if (ModeloUsuario.getUUID_Usuario() == null || ModeloUsuario.getUUID_Usuario().isEmpty()) {
+                    JOptionPane.showMessageDialog(vistaagregareventos, "Debe seleccionar que usuario está agregando las horas.");
+                    return;
                 }
-            
-            } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(vistaagregareventos, ex.getMessage());
-                return;
-            }
-            
             
             ModeloEventos.setNombre(vistaagregareventos.txtNombreevento.getText());
             ModeloEventos.setDescripcion(vistaagregareventos.txtDescripcion.getText());
@@ -214,34 +263,63 @@ public class ctrlAgregareventos implements MouseListener, KeyListener{
             
             //Validaciones para el nombre del evento
             
-            if (vistaagregareventos.txtNombreevento.getText().isEmpty()) {
+            String nombreEvento = vistaagregareventos.txtNombreevento.getText().trim();
+            
+            if (nombreEvento.isEmpty()) {
 
                 JOptionPane.showMessageDialog(vistaagregareventos, "El nombre del evento es obligatorio");
                 return;
             }
             
-            //Validaciones para el lugar del evento
+            if (!Character.isUpperCase(nombreEvento.charAt(0))) {
+                JOptionPane.showMessageDialog(vistaagregareventos, "El nombre del evento debe comenzar con mayúscula");
+                return;
+            }
             
-            if (vistaagregareventos.txtDescripcion.getText().isEmpty()) {
+            if (!nombreEvento.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]+")) {
+                JOptionPane.showMessageDialog(vistaagregareventos, "No se permiten carácteres especiales en el nombre del evento");
+                return;
+            }
+            
+            //Validaciones para la descripción del evento
+            
+            String descripcionEvento = vistaagregareventos.txtDescripcion.getText().trim();
+            
+            if (descripcionEvento.isEmpty()) {
 
                 JOptionPane.showMessageDialog(vistaagregareventos, "La descripción del evento es obligatoria");
                 return;
             } 
             
-            //Validaciones para la descripción del evento
+            if (!Character.isUpperCase(descripcionEvento.charAt(0))) {
+                JOptionPane.showMessageDialog(vistaagregareventos, "La descripción del evento debe comenzar con mayúscula");
+                return;
+            }
             
-            if (vistaagregareventos.txtLugar.getText().isEmpty()) {
+            if (!descripcionEvento.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]+")) {
+                JOptionPane.showMessageDialog(vistaagregareventos, "No se permiten carácteres especiales en la descripción");
+                return;
+            }
+            
+            //Validaciones para el lugar del evento
+            
+            String lugarEvento = vistaagregareventos.txtLugar.getText().trim();
+            
+            if (lugarEvento.isEmpty()) {
 
                 JOptionPane.showMessageDialog(vistaagregareventos, "La ubicación del evento es obligatoria");
                 return;
             } 
             
-            //Validaciones para la fecha del evento
-            
-            if (vistaagregareventos.txtFecha.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(vistaagregareventos, "La fecha del evento es obligatoria");
+            if (!Character.isUpperCase(lugarEvento.charAt(0))) {
+                JOptionPane.showMessageDialog(vistaagregareventos, "La ubicación del evento debe comenzar con mayúscula");
                 return;
-            } 
+            }
+            
+            if (!lugarEvento.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 ]+")) {
+                JOptionPane.showMessageDialog(vistaagregareventos, "No se permiten carácteres especiales en la descripción");
+                return;
+            }
             
             else { 
               // Verificar si el formato de la fecha es válido
@@ -287,6 +365,21 @@ public class ctrlAgregareventos implements MouseListener, KeyListener{
                       JOptionPane.showMessageDialog(vistaagregareventos, "Febrero solo tiene 28 días en años no bisiestos");
                       return;
                   }
+              }
+              
+              try {
+
+                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                  LocalDate fechaIngresada = LocalDate.parse(fecha, formatter);
+                  LocalDate fechaActual = LocalDate.now(); 
+        
+                  if (fechaIngresada.isBefore(fechaActual)) {
+                      JOptionPane.showMessageDialog(vistaagregareventos, "La fecha del evento debe ser actual o futura");
+                      return;
+                  }
+              
+              } catch (DateTimeParseException ex) {
+                  JOptionPane.showMessageDialog(vistaagregareventos, "La fecha ingresada no es válida");
               }
             } 
             
@@ -321,15 +414,10 @@ public class ctrlAgregareventos implements MouseListener, KeyListener{
                       
             //Validación para el combobox Usuarios
             
-            try {
-                if (vistaagregareventos.cbUsuarios.getSelectedIndex() == 0) {
-                    throw new IllegalArgumentException("Debe seleccionar un Usuario.");
+                if (ModeloUsuario.getUUID_Usuario() == null || ModeloUsuario.getUUID_Usuario().isEmpty()) {
+                    JOptionPane.showMessageDialog(vistaagregareventos, "Debe seleccionar que usuario está agregando las horas.");
+                    return;
                 }
-            
-            } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(vistaagregareventos, ex.getMessage());
-                return;
-            }
             
             ModeloEventos.setNombre(vistaagregareventos.txtNombreevento.getText());
             ModeloEventos.setDescripcion(vistaagregareventos.txtDescripcion.getText());

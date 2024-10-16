@@ -29,6 +29,7 @@ public class panelPrincipalcoordi extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         btnAgregarhorascoordi = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -46,7 +47,7 @@ public class panelPrincipalcoordi extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("¿Qué tal si hoy agregamos un par de horas?");
+        jLabel4.setText("¿Qué tal si agregamos un par de horas?");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
@@ -80,6 +81,11 @@ public class panelPrincipalcoordi extends javax.swing.JPanel {
         btnAgregarhorascoordi.setText("Agregar horas sociales");
         add(btnAgregarhorascoordi, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 390, 150));
 
+        jLabel10.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 8)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel10.setText("@jlsn Quickly! - 2024");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/pntprin.png"))); // NOI18N
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -88,6 +94,7 @@ public class panelPrincipalcoordi extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAgregarhorascoordi;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

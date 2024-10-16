@@ -3,6 +3,7 @@ package Vista;
 import Controlador.ctrlAgregareventoscoordi;
 import Modelo.Eventos;
 import Modelo.Usuario;
+import javax.swing.ImageIcon;
 
 
 public class frmAgregareventoscoordi extends javax.swing.JFrame {
@@ -10,6 +11,7 @@ public class frmAgregareventoscoordi extends javax.swing.JFrame {
 
     public frmAgregareventoscoordi() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imgs/quicklywindow.png")).getImage());
         setLocationRelativeTo(this);
         setSize(1015, 532); 
         setResizable(false);

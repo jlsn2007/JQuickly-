@@ -5,6 +5,7 @@ import Modelo.Comite;
 import Modelo.Grado;
 import Modelo.Rol;
 import Modelo.Usuario;
+import javax.swing.ImageIcon;
 
 
 public class frmAgregarusuarios extends javax.swing.JFrame {
@@ -12,6 +13,7 @@ public class frmAgregarusuarios extends javax.swing.JFrame {
 
     public frmAgregarusuarios() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imgs/quicklywindow.png")).getImage());
         setLocationRelativeTo(this);
         setSize(1015, 532); 
         setResizable(false);

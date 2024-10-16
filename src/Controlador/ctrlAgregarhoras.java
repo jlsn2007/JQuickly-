@@ -68,12 +68,18 @@ public class ctrlAgregarhoras implements MouseListener, KeyListener{
             
             try {
                 String nombreevento = vistahoras.txtNombredelevento.getText().trim();
+                
                 if (nombreevento.isEmpty()) {
                     throw new IllegalArgumentException("El nombre del evento es obligatorio.");
                 }
                 
                 if (!nombreevento.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
                     throw new IllegalArgumentException("El nombre del evento solo puede contener letras.");
+                }
+                
+                if (!Character.isUpperCase(nombreevento.charAt(0))) {
+                    JOptionPane.showMessageDialog(vistahoras, "El nombre del evento debe comenzar con mayúscula");
+                    return;
                 }
             
             } catch (IllegalArgumentException ex) {
@@ -102,6 +108,11 @@ public class ctrlAgregarhoras implements MouseListener, KeyListener{
                 return;
             }
             
+            if (modelousuario.getUUID_Usuario() == null || modelousuario.getUUID_Usuario().isEmpty()) {
+                JOptionPane.showMessageDialog(vistahoras, "Debe seleccionar un alumno a quien asignar horas.");
+                return;
+            }
+            
             modeloexpediente.setNombre_evento(vistahoras.txtNombredelevento.getText());
             
             int horasNumericas = Integer.parseInt(vistahoras.txtCantidadhoras.getText().trim());
@@ -122,6 +133,11 @@ public class ctrlAgregarhoras implements MouseListener, KeyListener{
                 String nombreevento = vistahoras.txtNombredelevento.getText().trim();
                 if (nombreevento.isEmpty()) {
                     throw new IllegalArgumentException("El nombre del evento es obligatorio.");
+                }
+                
+                if (!Character.isUpperCase(nombreevento.charAt(0))) {
+                    JOptionPane.showMessageDialog(vistahoras, "El nombre del evento debe comenzar con mayúscula");
+                    return;
                 }
                 
                 if (!nombreevento.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
@@ -149,6 +165,11 @@ public class ctrlAgregarhoras implements MouseListener, KeyListener{
             
             } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(vistahoras, ex.getMessage());
+                return;
+            }
+            
+            if (modelousuario.getUUID_Usuario() == null || modelousuario.getUUID_Usuario().isEmpty()) {
+                JOptionPane.showMessageDialog(vistahoras, "Debe seleccionar un alumno a quien asignar horas.");
                 return;
             }
             

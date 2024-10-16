@@ -3,6 +3,7 @@ package Vista;
 import Controlador.ctrlAgregareventos;
 import Modelo.Eventos;
 import Modelo.Usuario;
+import javax.swing.ImageIcon;
 
 
 public class frmAgregareventos extends javax.swing.JFrame {
@@ -10,6 +11,7 @@ public class frmAgregareventos extends javax.swing.JFrame {
 
     public frmAgregareventos() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imgs/quicklywindow.png")).getImage());
         setLocationRelativeTo(this);
         setSize(1015, 532); 
         setResizable(false);

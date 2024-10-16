@@ -18,6 +18,7 @@ public class ctrlRecuperarcontrasena implements MouseListener, KeyListener{
     private Usuario ModeloUsrecucontra;
     private frmRecuperarcontrasena VistaRecucontrasena;
     public static String correoglobal;
+    public static int codigorecuperacion;
 
     
     public ctrlRecuperarcontrasena(Usuario ModeUsRecuperarcontrasena, frmRecuperarcontrasena VisRecuperarcontrasena){
@@ -47,9 +48,11 @@ public class ctrlRecuperarcontrasena implements MouseListener, KeyListener{
             return;
         } 
         
-        
         Random random = new Random();
+        
         int numeroAleatorio = 1000 + random.nextInt(9000);
+        
+        codigorecuperacion = numeroAleatorio;
 
         String recipient = VistaRecucontrasena.txtCorreorecu.getText();
         String subject = "¡Hey, Recupera tu contraseña rápido!";
@@ -63,6 +66,7 @@ public class ctrlRecuperarcontrasena implements MouseListener, KeyListener{
         Vista.frmCodigoverificacion.initfrmCodigoveri();
         VistaRecucontrasena.dispose();
         return;
+        
     }
     
     if (e.getSource() == VistaRecucontrasena.Volverrecu) {

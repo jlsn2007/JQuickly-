@@ -23,6 +23,7 @@ public class panelCalendario extends javax.swing.JPanel {
         btnAgregareventos = new javax.swing.JButton();
         jCalendar1 = new com.toedter.calendar.JCalendar();
         jLabel2 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -51,6 +52,11 @@ public class panelCalendario extends javax.swing.JPanel {
         jLabel2.setText("Calendario");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, -1, -1));
 
+        jLabel10.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 8)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel10.setText("@jlsn Quickly! - 2024");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/pntcalen.png"))); // NOI18N
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -64,6 +70,7 @@ public class panelCalendario extends javax.swing.JPanel {
     public javax.swing.JButton btnAgregareventos;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

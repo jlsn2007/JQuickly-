@@ -3,11 +3,13 @@ package Vista;
 import Controlador.ctrlExpedientes;
 import Modelo.Expediente;
 import Modelo.Usuario;
+import javax.swing.ImageIcon;
 
 public class frmExpedientes extends javax.swing.JFrame {
 
     public frmExpedientes() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imgs/quicklywindow.png")).getImage());
         setLocationRelativeTo(this);
         setSize(1015, 532); 
         setResizable(false);

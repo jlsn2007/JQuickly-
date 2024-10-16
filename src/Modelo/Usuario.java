@@ -104,6 +104,7 @@ public class Usuario {
     }
     
     public void CargarComboboxUsuarios (JComboBox comboBox) {
+        
     Connection conexion = ClaseConexion.getConexion();
     comboBox.removeAllItems();
    
@@ -125,6 +126,7 @@ public class Usuario {
     //Método combobox de alumnos a quien agregar horas
     
     public void CargarComboboxAlumnos (JComboBox comboBox) {
+        
     Connection conexion = ClaseConexion.getConexion();
     comboBox.removeAllItems();
    
@@ -319,21 +321,7 @@ public class Usuario {
         newUs.executeUpdate();
         
     } catch (SQLException ex) {
-        
-        if (ex.getErrorCode() == 2291) { 
-            System.out.println("Error: Clave principal no encontrada para los siguientes IDs:");
-            if (getId_grado() <= 0) {
-                System.out.println("ID Grado: " + getId_grado() + " es inválido.");
-            }
-            if (getId_rol() <= 0) {
-                System.out.println("ID Rol: " + getId_rol() + " es inválido.");
-            }
-            if (getId_comite() <= 0) {
-                System.out.println("ID Comité: " + getId_comite() + " es inválido.");
-            }
-        } else {
-            System.out.println("Este es el error en el modelo usuario: método guardar " + ex);
-        }
+        System.out.println("Este es el error en el modelo usuario: método guardar " + ex);
     }
 }
 

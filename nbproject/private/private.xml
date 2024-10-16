@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/jQuickly/src/Modelo/Usuario.java</file>
-            <file>file:/C:/jQuickly/src/Controlador/ctrlLogin.java</file>
-            <file>file:/C:/jQuickly/src/Vista/frmLogin.java</file>
+            <file>file:/C:/jQuickly/src/Controlador/ctrlAgregareventos.java</file>
+            <file>file:/C:/jQuickly/src/Controlador/ctrlAgregareventoscoordi.java</file>
+            <file>file:/C:/jQuickly/src/Controlador/ctrlAgregarhoras.java</file>
+            <file>file:/C:/jQuickly/src/Controlador/ctrlAgregarusuarios.java</file>
         </group>
     </open-files>
 </project-private>

@@ -3,6 +3,7 @@ package Controlador;
 import Modelo.EnviarCorreos;
 import Modelo.Usuario;
 import Vista.frmCodigoverificacion;
+import Vista.frmReestablecercontrasena;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -19,11 +20,25 @@ public class ctrlCodigoverificacion implements MouseListener, KeyListener{
 
         this.Modelous = usuarios;
         this.VisCodigoverificacion = VisCodigoverificacion;
+
         
         VisCodigoverificacion.txtCodigo.addMouseListener(this);
         VisCodigoverificacion.btnVerificarcodigo.addMouseListener(this);
         VisCodigoverificacion.Volvercod.addMouseListener(this);
     }
+    
+    public void verificarCodigo(int codigo) {
+
+        if (codigo == ctrlRecuperarcontrasena.codigorecuperacion) {
+
+            frmReestablecercontrasena.initfrmRescontra();
+            
+            VisCodigoverificacion.dispose();  
+            
+        } else {
+            JOptionPane.showMessageDialog(VisCodigoverificacion, "El código que has ingresado es incorrecto.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+}
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -35,27 +50,33 @@ public class ctrlCodigoverificacion implements MouseListener, KeyListener{
         }
         
         if (e.getSource() == VisCodigoverificacion.btnVerificarcodigo) {
+                        
+            String codigoIngresado = VisCodigoverificacion.txtCodigo.getText().trim();
             
-            if (VisCodigoverificacion.txtCodigo.getText().isEmpty()) {
+            if (codigoIngresado.isEmpty()) {
 
                 JOptionPane.showMessageDialog(VisCodigoverificacion, "Ingrése el código que se le ha proporcionado");
                 return;
             } 
             
             // Verificar si el código contiene solo números
-            if (!VisCodigoverificacion.txtCodigo.getText().matches("\\d+")) {
+            if (!codigoIngresado.matches("\\d+")) {
                 JOptionPane.showMessageDialog(VisCodigoverificacion, "El código debe contener solo números");
                 return;
             }
             
             // Verificar si el código tiene exactamente 4 dígitos
-            if (VisCodigoverificacion.txtCodigo.getText().length() != 4) {
+            if (codigoIngresado.length() != 4) {
                 JOptionPane.showMessageDialog(VisCodigoverificacion, "Longitud del correo inválida");
                 return;
             }
             
-            Vista.frmReestablecercontrasena.initfrmRescontra();
-            VisCodigoverificacion.dispose();
+             try {
+                    int codigo = Integer.parseInt(VisCodigoverificacion.txtCodigo.getText());
+                    verificarCodigo(codigo);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(VisCodigoverificacion, "Por favor, ingrese un código válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             
         }
     }

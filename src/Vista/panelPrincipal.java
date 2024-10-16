@@ -36,6 +36,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         btnExpedientes.setBackground(new java.awt.Color(255, 210, 167));
@@ -105,6 +106,11 @@ public class panelPrincipal extends javax.swing.JPanel {
         jLabel7.setText("El tiempo en manos");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, -1, -1));
 
+        jLabel10.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 8)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel10.setText("@jlsn Quickly! - 2024");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/pntprin.png"))); // NOI18N
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -116,6 +122,7 @@ public class panelPrincipal extends javax.swing.JPanel {
     public javax.swing.JButton btnPagregarus;
     public javax.swing.JButton btngregarhoras;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -2,11 +2,13 @@ package Vista;
 
 import Controlador.ctrlAgregarcomites;
 import Modelo.Comite;
+import javax.swing.ImageIcon;
 
 public class frmAgregarcomites extends javax.swing.JFrame {
 
     public frmAgregarcomites() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imgs/quicklywindow.png")).getImage());
         setLocationRelativeTo(this);
         setSize(1015, 532); 
         setResizable(false);

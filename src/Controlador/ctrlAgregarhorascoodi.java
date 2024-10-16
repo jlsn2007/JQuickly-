@@ -71,6 +71,11 @@ public class ctrlAgregarhorascoodi implements MouseListener, KeyListener{
                     throw new IllegalArgumentException("El nombre del evento es obligatorio.");
                 }
                 
+                if (!Character.isUpperCase(nombreevento.charAt(0))) {
+                    JOptionPane.showMessageDialog(vfhorascoordi, "El nombre del evento debe comenzar con mayúscula");
+                    return;
+                }
+                
                 if (!nombreevento.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
                     throw new IllegalArgumentException("El nombre del evento solo puede contener letras.");
                 }
@@ -101,6 +106,11 @@ public class ctrlAgregarhorascoodi implements MouseListener, KeyListener{
                 return;
             }
             
+            if (uscoordi.getUUID_Usuario() == null || uscoordi.getUUID_Usuario().isEmpty()) {
+                JOptionPane.showMessageDialog(vfhorascoordi, "Debe seleccionar un Alumno a quien asignar horas.");
+                return;
+            }
+            
             excoordi.setNombre_evento(vfhorascoordi.txtNombredelevento.getText());
             
             int horasNumericas = Integer.parseInt(vfhorascoordi.txtCantidadhoras.getText().trim());
@@ -121,6 +131,11 @@ public class ctrlAgregarhorascoodi implements MouseListener, KeyListener{
                 String nombreevento = vfhorascoordi.txtNombredelevento.getText().trim();
                 if (nombreevento.isEmpty()) {
                     throw new IllegalArgumentException("El nombre del evento es obligatorio.");
+                }
+                
+                if (!Character.isUpperCase(nombreevento.charAt(0))) {
+                    JOptionPane.showMessageDialog(vfhorascoordi, "El nombre del evento debe comenzar con mayúscula");
+                    return;
                 }
                 
                 if (!nombreevento.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
@@ -148,6 +163,11 @@ public class ctrlAgregarhorascoodi implements MouseListener, KeyListener{
             
             } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(vfhorascoordi, ex.getMessage());
+                return;
+            }
+            
+            if (uscoordi.getUUID_Usuario() == null || uscoordi.getUUID_Usuario().isEmpty()) {
+                JOptionPane.showMessageDialog(vfhorascoordi, "Debe seleccionar un Alumno a quien asignar horas.");
                 return;
             }
             

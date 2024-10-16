@@ -57,6 +57,10 @@ public class ctrlAgregarcomites implements MouseListener, KeyListener{
                 if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
                     throw new IllegalArgumentException("El nombre solo puede contener letras.");
                 }
+                
+                if (!Character.isUpperCase(nombre.charAt(0))) {
+                    throw new IllegalArgumentException("El nombre debe empezar con una letra mayúscula.");
+                }
         
             } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(vistacom, ex.getMessage());
@@ -71,6 +75,10 @@ public class ctrlAgregarcomites implements MouseListener, KeyListener{
             
                 if (!descripcion.matches("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]+")) {
                     throw new IllegalArgumentException("La descripción solo puede contener letras y números sin caracteres especiales.");
+                }
+                
+                if (!Character.isUpperCase(descripcion.charAt(0))) {
+                    throw new IllegalArgumentException("La descripción debe de iniciar con mayúscula");
                 }
                 
             } catch (IllegalArgumentException ex) {
@@ -124,6 +132,10 @@ public class ctrlAgregarcomites implements MouseListener, KeyListener{
                 if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
                     throw new IllegalArgumentException("El nombre solo puede contener letras.");
                 }
+                
+                if (!Character.isUpperCase(nombre.charAt(0))) {
+                    throw new IllegalArgumentException("El nombre debe empezar con una letra mayúscula.");
+                }
         
             } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(vistacom, ex.getMessage());
@@ -138,6 +150,10 @@ public class ctrlAgregarcomites implements MouseListener, KeyListener{
             
                 if (!descripcion.matches("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]+")) {
                     throw new IllegalArgumentException("La descripción solo puede contener letras y números sin caracteres especiales.");
+                }
+                
+                if (!Character.isUpperCase(descripcion.charAt(0))) {
+                    throw new IllegalArgumentException("La descripción debe de iniciar con mayúscula");
                 }
                 
             } catch (IllegalArgumentException ex) {

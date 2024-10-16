@@ -58,25 +58,8 @@ public class ctrlAgregarusuarios implements MouseListener, KeyListener {
                 Rol selectedRol = (Rol) vistaus.cbRol.getSelectedItem();
                 if(selectedRol != null) {
                     int idr = selectedRol.getId_rol();
+                    ModeloRol.setId_rol(idr);
                     System.out.println("Esto es lo que se manda a traer de la base de datos (Rol): " + selectedRol.getTipo_rol() + " con ID: " + idr);
-                    
-            /*// Si el rol es Administrador (supongamos que el ID es 1) 
-            if(idr == 3) { 
-                vistaus.cbGrado.setEnabled(false);
-                vistaus.cbComite.setEnabled(false);
-            } 
-            // Si el rol es Coordinador (supongamos que el ID es 2)
-            else if(idr == 2) { 
-                vistaus.cbGrado.setEnabled(false);
-                vistaus.cbComite.setEnabled(true);
-            } 
-            // Si el rol es Alumno (supongamos que el ID es 3)
-            else if(idr == 1) {
-                vistaus.cbGrado.setEnabled(true);
-                vistaus.cbComite.setEnabled(true);
-            }*/
-            
-            ModeloRol.setId_rol(idr);
                 }
             }
         });
@@ -120,11 +103,31 @@ public class ctrlAgregarusuarios implements MouseListener, KeyListener {
         
         if(e.getSource() == vistaus.btnAgregarusuarios){
             
+            if (ModeloRol.getId_rol() <= 0) {
+                JOptionPane.showMessageDialog(vistaus, "Debe seleccionar un Rol");
+                return;
+            }
+            
+            if (ModeloGrado.getId_grado() <= 0) {
+                JOptionPane.showMessageDialog(vistaus, "Debe seleccionar un Grado");
+                return;
+            }
+            
+            if (ModeloComite.getId_comite() <= 0) {
+                JOptionPane.showMessageDialog(vistaus, "Debe seleccionar un Comité");
+                return;
+            }
+            
             //Validaciones para el nombre
             try {
                 String nombre = vistaus.txtNombreus.getText().trim();
                 if (nombre.isEmpty()) {
                     throw new IllegalArgumentException("El nombre es obligatorio.");
+                }
+                
+                if (!Character.isUpperCase(nombre.charAt(0))) {
+                    JOptionPane.showMessageDialog(vistaus, "El nombre del Usuario debe comenzar con mayúscula");
+                    return;
                 }
                 
                 if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
@@ -177,19 +180,20 @@ public class ctrlAgregarusuarios implements MouseListener, KeyListener {
             // Validación para el ComboBox de Rol
                 
                 try {
-                    if (vistaus.cbRol.getSelectedIndex() == -1 && vistaus.cbRol.isEnabled()) {
-                        throw new IllegalArgumentException("Debe seleccionar un Rol.");
-                    }
+                    if (vistaus.cbRol.getSelectedItem()== null) { 
+                        throw new Exception("Debe seleccionar un Rol válido.");
+                    }  
                 
-                } catch (IllegalArgumentException ex) {
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(vistaus, ex.getMessage());
                     return;
                 }
             
             // Validación para el ComboBox de Grado
+            
                 
                 try {
-                    if (vistaus.cbGrado.getSelectedIndex() == -1 && vistaus.cbGrado.isEnabled()) {
+                    if (vistaus.cbGrado.getSelectedItem() == null) { 
                         throw new IllegalArgumentException("Debe seleccionar un Grado.");
                     }
                 
@@ -201,7 +205,7 @@ public class ctrlAgregarusuarios implements MouseListener, KeyListener {
                 // Validación para el ComboBox de Comité
                 
                 try {
-                    if (vistaus.cbComite.getSelectedIndex() == -1 && vistaus.cbComite.isEnabled()) {
+                    if (vistaus.cbComite.getSelectedItem() == null) {
                         throw new IllegalArgumentException("Debe seleccionar un Comité.");
                     }
                 
@@ -233,6 +237,11 @@ public class ctrlAgregarusuarios implements MouseListener, KeyListener {
                     String nombre = vistaus.txtNombreus.getText().trim();
                     if (nombre.isEmpty()) {
                         throw new IllegalArgumentException("El nombre es obligatorio.");
+                    }
+                    
+                    if (!Character.isUpperCase(nombre.charAt(0))) {
+                        JOptionPane.showMessageDialog(vistaus, "El nombre del Usuario debe comenzar con mayúscula");
+                        return;
                     }
                     
                     if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
@@ -287,41 +296,25 @@ public class ctrlAgregarusuarios implements MouseListener, KeyListener {
                     return;
                 }
                 
-                // Validación para el ComboBox de Rol
+                //Otras validaciones para los combobox
                 
-                try {
-                    if (vistaus.cbRol.getSelectedIndex() == 0) {
-                        throw new IllegalArgumentException("Debe seleccionar un Rol.");
-                    }
-                
-                } catch (IllegalArgumentException ex) {
-                    JOptionPane.showMessageDialog(vistaus, ex.getMessage());
+                if (ModeloRol.getId_rol() <= 0) {
+                    JOptionPane.showMessageDialog(vistaus, "Debe seleccionar un Rol");
+                    return;
+                }
+            
+            
+                if (ModeloGrado.getId_grado() <= 0) {
+                    JOptionPane.showMessageDialog(vistaus, "Debe seleccionar un Grado");
+                    return;
+                }
+            
+            
+                if (ModeloComite.getId_comite() <= 0) {
+                    JOptionPane.showMessageDialog(vistaus, "Debe seleccionar un Comité");
                     return;
                 }
                 
-                // Validación para el ComboBox de Grado
-                
-                try {
-                    if (vistaus.cbGrado.getSelectedIndex() == 0) {
-                        throw new IllegalArgumentException("Debe seleccionar un Grado.");
-                    }
-                
-                } catch (IllegalArgumentException ex) {
-                    JOptionPane.showMessageDialog(vistaus, ex.getMessage());
-                    return;
-                }
-                
-                // Validación para el ComboBox de Comité
-                
-                try {
-                    if (vistaus.cbComite.getSelectedIndex() == 0) {
-                        throw new IllegalArgumentException("Debe seleccionar un Comité.");
-                    }
-                
-                } catch (IllegalArgumentException ex) {
-                    JOptionPane.showMessageDialog(vistaus, ex.getMessage());
-                    return;
-                }
             
             ModeloUsuario.setNombre(vistaus.txtNombreus.getText());
             ModeloUsuario.setCorreo_electronico(vistaus.txtCorreous.getText());

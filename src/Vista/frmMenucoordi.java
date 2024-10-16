@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.ctrlMenucoordi;
+import javax.swing.ImageIcon;
 
 
 public class frmMenucoordi extends javax.swing.JFrame {
@@ -8,6 +9,7 @@ public class frmMenucoordi extends javax.swing.JFrame {
 
     public frmMenucoordi() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imgs/quicklywindow.png")).getImage());
         setLocationRelativeTo(this);
         setSize(1015, 532); 
         setResizable(false);

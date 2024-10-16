@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.ctrlMenu;
+import javax.swing.ImageIcon;
 
 
 public class frmMenu extends javax.swing.JFrame {
@@ -8,6 +9,7 @@ public class frmMenu extends javax.swing.JFrame {
 
     public frmMenu() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imgs/quicklywindow.png")).getImage());
         setLocationRelativeTo(this);
         setSize(1015, 532); 
         setResizable(false);

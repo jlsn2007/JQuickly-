@@ -2,12 +2,14 @@ package Vista;
 
 import Controlador.ctrlLogin;
 import Modelo.Usuario;
+import javax.swing.ImageIcon;
 
 
 public class frmLogin extends javax.swing.JFrame {
-
+    
     public frmLogin() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imgs/quicklywindow.png")).getImage());
         setLocationRelativeTo(this);
         setSize(1015, 532); 
         setResizable(false);

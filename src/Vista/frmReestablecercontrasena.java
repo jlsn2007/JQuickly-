@@ -2,6 +2,7 @@ package Vista;
 
 import Controlador.ctrlReestablecercontrasena;
 import Modelo.Usuario;
+import javax.swing.ImageIcon;
 
 
 public class frmReestablecercontrasena extends javax.swing.JFrame {
@@ -9,6 +10,7 @@ public class frmReestablecercontrasena extends javax.swing.JFrame {
 
     public frmReestablecercontrasena() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imgs/quicklywindow.png")).getImage());
         setLocationRelativeTo(this);
         setSize(1015, 532); 
         setResizable(false);

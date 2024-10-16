@@ -3,11 +3,13 @@ package Vista;
 import Controlador.ctrlAgregarhoras;
 import Modelo.Expediente;
 import Modelo.Usuario;
+import javax.swing.ImageIcon;
 
 public class frmAgregarhoras extends javax.swing.JFrame {
 
     public frmAgregarhoras() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imgs/quicklywindow.png")).getImage());
         setLocationRelativeTo(this);
         setSize(1015, 532); 
         setResizable(false);
@@ -66,7 +68,7 @@ public class frmAgregarhoras extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 153, 153));
-        jLabel2.setText("Usuario a quien agregar horas:");
+        jLabel2.setText("Alumno a quien agregar horas:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));

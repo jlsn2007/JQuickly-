@@ -3,12 +3,14 @@ package Vista;
 import Controlador.ctrlAgregarhorascoodi;
 import Modelo.Expediente;
 import Modelo.Usuario;
+import javax.swing.ImageIcon;
 
 public class frmAgregarhorascoordi extends javax.swing.JFrame {
 
 
     public frmAgregarhorascoordi() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imgs/quicklywindow.png")).getImage());
         setLocationRelativeTo(this);
         setSize(1015, 532); 
         setResizable(false);
@@ -83,7 +85,7 @@ public class frmAgregarhorascoordi extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Inter 24pt ExtraBold", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 153, 51));
-        jLabel3.setText("Usuario a quien agregar horas:");
+        jLabel3.setText("Alumno a quien agregar horas:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/e.png"))); // NOI18N
